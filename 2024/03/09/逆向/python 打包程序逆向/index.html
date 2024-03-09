@@ -16,21 +16,35 @@
   <meta name="author" content="John Doe">
   <meta name="keywords" content="">
   
-    <meta name="description" content="c\c++的输入输出c语言的输入输出gets()按下回车键时，从stdin读取一行。用法示例： 12char str[100];gets(str);  对空白字符的处理：1.所有空格、Tab等空白字符均被读取，不忽略。2.按下回车键时，缓冲区末尾的换行符被丢弃，字符串末尾没有换行符\n，缓冲区也没有残留的换行符\n。注意，gets()不能指定读取上限，因此容易发生数组边界溢出，造成内存不安全。C1">
+    <meta name="description" content="1.用 Detect It Easy查看：打包工具为pyinstaller 2.反编译可执行程序我们下载反编译工具pyinstxtractor.py与我们要反编译的.exe文件放入同一个工作目录下，如下图所示：  1.\pyinstxtractor.py 测试脚本.exe  执行完毕，看到Successfully字样，会生成测试脚本.exe_extracted文件夹，如下图所示：进入该文件夹，里面">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Poseidon">
-<meta property="og:url" content="http://example.com/2024/01/23/%E7%BC%96%E7%A8%8B/c++%E5%9F%BA%E6%9C%AC%E8%AF%AD%E6%B3%95/index.html">
+<meta property="og:title" content="python 打包程序逆向">
+<meta property="og:url" content="http://example.com/2024/03/09/%E9%80%86%E5%90%91/python%20%E6%89%93%E5%8C%85%E7%A8%8B%E5%BA%8F%E9%80%86%E5%90%91/index.html">
 <meta property="og:site_name" content="Poseidon">
-<meta property="og:description" content="c\c++的输入输出c语言的输入输出gets()按下回车键时，从stdin读取一行。用法示例： 12char str[100];gets(str);  对空白字符的处理：1.所有空格、Tab等空白字符均被读取，不忽略。2.按下回车键时，缓冲区末尾的换行符被丢弃，字符串末尾没有换行符\n，缓冲区也没有残留的换行符\n。注意，gets()不能指定读取上限，因此容易发生数组边界溢出，造成内存不安全。C1">
+<meta property="og:description" content="1.用 Detect It Easy查看：打包工具为pyinstaller 2.反编译可执行程序我们下载反编译工具pyinstxtractor.py与我们要反编译的.exe文件放入同一个工作目录下，如下图所示：  1.\pyinstxtractor.py 测试脚本.exe  执行完毕，看到Successfully字样，会生成测试脚本.exe_extracted文件夹，如下图所示：进入该文件夹，里面">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2024-01-23T03:16:54.537Z">
-<meta property="article:modified_time" content="2024-01-23T04:32:45.089Z">
+<meta property="og:image" content="https://bbs.kanxue.com/upload/attach/202306/909733_X2KAP5KQVCZ9UWP.png">
+<meta property="og:image" content="https://bbs.kanxue.com/upload/attach/202306/909733_TSVJWEKQZXT6H2V.png">
+<meta property="og:image" content="https://bbs.kanxue.com/upload/attach/202306/909733_P5ZJS35R4ZH64FK.png">
+<meta property="og:image" content="https://bbs.kanxue.com/upload/attach/202306/909733_N58BJTSJQ6UH42K.png">
+<meta property="og:image" content="https://bbs.kanxue.com/upload/attach/202306/909733_KK2YYUE5ERUAB9J.png">
+<meta property="og:image" content="https://bbs.kanxue.com/upload/attach/202306/909733_QSGE9VP6YBE9W6Y.png">
+<meta property="og:image" content="https://bbs.kanxue.com/upload/attach/202306/909733_ATGJ9GJEUGXUUBA.png">
+<meta property="og:image" content="https://bbs.kanxue.com/upload/attach/202306/909733_JFKCBG5M4T94S3H.png">
+<meta property="og:image" content="https://bbs.kanxue.com/upload/attach/202306/909733_YMPPVDSANDUS5WY.png">
+<meta property="og:image" content="https://bbs.kanxue.com/upload/attach/202306/909733_AXX35TQDYDNFVH2.png">
+<meta property="og:image" content="https://bbs.kanxue.com/upload/attach/202306/909733_RE992TMUU9HFHUP.png">
+<meta property="og:image" content="https://bbs.kanxue.com/upload/attach/202306/909733_VB2KNPETFQ3TFW2.png">
+<meta property="article:published_time" content="2024-03-09T10:56:50.000Z">
+<meta property="article:modified_time" content="2024-03-09T11:06:58.850Z">
 <meta property="article:author" content="John Doe">
+<meta property="article:tag" content="pyc">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://bbs.kanxue.com/upload/attach/202306/909733_X2KAP5KQVCZ9UWP.png">
   
   
   
-  <title>Poseidon</title>
+  <title>python 打包程序逆向 - Poseidon</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -225,7 +239,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text=""></span>
+            <span id="subtitle" data-typed-text="python 打包程序逆向"></span>
           
         </div>
 
@@ -236,8 +250,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2024-01-23 11:16" pubdate>
-          2024年1月23日 上午
+        <time datetime="2024-03-09 18:56" pubdate>
+          2024年3月9日 晚上
         </time>
       </span>
     
@@ -248,7 +262,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          1.7k 字
+          569 字
         
       </span>
     
@@ -259,7 +273,7 @@
         
         
         
-          15 分钟
+          5 分钟
         
       </span>
     
@@ -304,70 +318,24 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header"></h1>
+            <h1 id="seo-header">python 打包程序逆向</h1>
             
             
               <div class="markdown-body">
                 
-                <h2 id="c-c-的输入输出"><a href="#c-c-的输入输出" class="headerlink" title="c\c++的输入输出"></a>c\c++的输入输出</h2><h3 id="c语言的输入输出"><a href="#c语言的输入输出" class="headerlink" title="c语言的输入输出"></a>c语言的输入输出</h3><h5 id="gets"><a href="#gets" class="headerlink" title="gets()"></a>gets()</h5><p>按下回车键时，从stdin读取一行。<br>用法示例：</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-type">char</span> str[<span class="hljs-number">100</span>];<br>gets(str);<br></code></pre></td></tr></table></figure>
+                <h4 id="1-用-Detect-It-Easy查看："><a href="#1-用-Detect-It-Easy查看：" class="headerlink" title="1.用 Detect It Easy查看："></a>1.用 Detect It Easy查看：</h4><p>打包工具为pyinstaller</p>
+<h4 id="2-反编译可执行程序"><a href="#2-反编译可执行程序" class="headerlink" title="2.反编译可执行程序"></a>2.反编译可执行程序</h4><p>我们下载反编译工具<strong>pyinstxtractor.py</strong>与我们要反编译的.exe文件放入同一个工作目录下，如下图所示：</p>
+<p><img src="https://bbs.kanxue.com/upload/attach/202306/909733_X2KAP5KQVCZ9UWP.png" srcset="/img/loading.gif" lazyload alt="图片描述"></p>
+<figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs vim">.\pyinstxtractor.<span class="hljs-keyword">py</span> 测试脚本.<span class="hljs-keyword">exe</span><br></code></pre></td></tr></table></figure>
 
-<p>对空白字符的处理：<br>1.所有空格、Tab等空白字符均被读取，不忽略。<br>2.按下回车键时，缓冲区末尾的换行符被丢弃，字符串末尾没有换行符\n，缓冲区也没有残留的换行符\n。<br>注意，gets()不能指定读取上限，因此容易发生数组边界溢出，造成<strong>内存不安全</strong>。C11 使用了gets_s()代替gets()，但有时编译器未必支持，因此总体来说不建议使用gets()函数来读取输入。</p>
-<p>gets()对应的输出函数是puts()。</p>
-<h5 id="fgets"><a href="#fgets" class="headerlink" title="fgets()"></a>fgets()</h5><p>从指定输入流读取一行，输入可以是stdin，也可以是文件流，使用时需要显式指定。</p>
-<p>读取stdin示例：</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-type">char</span> s1[<span class="hljs-number">1005</span>];<br>fgets(s1,<span class="hljs-number">1004</span>,<span class="hljs-built_in">stdin</span>);<span class="hljs-comment">//换行符占两个字符</span><br></code></pre></td></tr></table></figure>
+<p>执行完毕，看到<code>Successfully</code>字样，会生成<code>测试脚本.exe_extracted</code>文件夹，如下图所示：<br><img src="https://bbs.kanxue.com/upload/attach/202306/909733_TSVJWEKQZXT6H2V.png" srcset="/img/loading.gif" lazyload alt="图片描述"><br>进入该文件夹，里面有许许多多后缀为<code>.dll</code>和<code>.pyd</code>的文件，还有一个名为<code>PYZ-00.pyz_extracted</code>的文件夹，这个文件夹里放的是程序引入的<code>依赖库</code>，如果你引入过自己其他的<code>.py</code>文件，就可以用类似的方法将依赖的<code>.py</code>文件反编译出来，如下图所示：<br><img src="https://bbs.kanxue.com/upload/attach/202306/909733_P5ZJS35R4ZH64FK.png" srcset="/img/loading.gif" lazyload alt="图片描述"><br>在目录中我们要找到<code>struct</code>和与你的<code>.exe</code>文件同名的文件。如下图所示：<br><img src="https://bbs.kanxue.com/upload/attach/202306/909733_N58BJTSJQ6UH42K.png" srcset="/img/loading.gif" lazyload alt="图片描述"><br>这两个文件是否带<code>.pyc</code>后缀和你使用的<code>pyinstxtractor.py</code>工具版本有关系。V2.0以前的版本，会生成两个不带<code>.pyc</code>后缀的文件，手动为它添加<code>.pyc</code>后缀即可。如下图所示：<br><img src="https://bbs.kanxue.com/upload/attach/202306/909733_KK2YYUE5ERUAB9J.png" srcset="/img/loading.gif" lazyload alt="图片描述"><br>当前这个<code>测试脚本.pyc</code>文件是没有<code>Magic Number</code>的，我们需要根据Python版本自行补全，由上图可知打包此程序的Python版本为3.6，我们接下来就需要查3.6版本的<code>Magic Number</code>。</p>
+<h4 id="3-看struct-pyc文件："><a href="#3-看struct-pyc文件：" class="headerlink" title="3.看struct.pyc文件："></a>3.看<code>struct.pyc</code>文件：</h4><p>将<code>struct.pyc</code>文件使用<code>WinHex编辑器</code>打开，它的前4位字节就是<code>magic num</code>与方法一的二进制码相同。如下图所示：<br><img src="https://bbs.kanxue.com/upload/attach/202306/909733_QSGE9VP6YBE9W6Y.png" srcset="/img/loading.gif" lazyload alt="图片描述"><br>再打开<code>测试脚本.pyc</code>与<code>struct.pyc</code>对比头内容确定要添加的内容，如下图所示：<br><img src="https://bbs.kanxue.com/upload/attach/202306/909733_ATGJ9GJEUGXUUBA.png" srcset="/img/loading.gif" lazyload alt="图片描述"></p>
+<p>改pyc文件</p>
+<p>选中<code>struct.pyc</code>中框选的头内容，右键编辑→复制选块→十六进制数值。<code>330D0D0A7079693001010000</code><br><img src="https://bbs.kanxue.com/upload/attach/202306/909733_JFKCBG5M4T94S3H.png" srcset="/img/loading.gif" lazyload alt="图片描述"><br>打开<code>测试脚本.pyc</code>，直接在前面添加，上面复制的十六进制数值<code>330D0D0A7079693001010000</code>，光标点击第一个字母<code>E</code>右键编辑→剪贴板数据→粘贴→ASCII Hex→确定，然后保存即修改完毕！如下图所示：<br><img src="https://bbs.kanxue.com/upload/attach/202306/909733_YMPPVDSANDUS5WY.png" srcset="/img/loading.gif" lazyload alt="图片描述"><br><img src="https://bbs.kanxue.com/upload/attach/202306/909733_AXX35TQDYDNFVH2.png" srcset="/img/loading.gif" lazyload alt="图片描述"><br><img src="https://bbs.kanxue.com/upload/attach/202306/909733_RE992TMUU9HFHUP.png" srcset="/img/loading.gif" lazyload alt="图片描述"></p>
+<h4 id="4-pyc文件转换为py文件"><a href="#4-pyc文件转换为py文件" class="headerlink" title="4.pyc文件转换为py文件"></a>4.pyc文件转换为py文件</h4><p>找到<code>测试脚本.pyc</code>所在的文件夹，<code>cd</code> 到此路径下，并输入以下打包命令：</p>
+<figure class="highlight jboss-cli"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs jboss-cli">uncompyle6 -o 测试脚本<span class="hljs-string">.py</span> 测试脚本<span class="hljs-string">.pyc</span><br></code></pre></td></tr></table></figure>
 
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-type">char</span> str[<span class="hljs-number">100</span>];<br><span class="hljs-built_in">memset</span>(str, <span class="hljs-number">0</span>, <span class="hljs-keyword">sizeof</span>(str));<br><span class="hljs-type">int</span> i = <span class="hljs-number">1</span>;<br><span class="hljs-keyword">while</span> (fgets(str, <span class="hljs-keyword">sizeof</span>(str), <span class="hljs-built_in">stdin</span>) != <span class="hljs-literal">NULL</span>)<br>    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;line%d [len %d]: %s&quot;</span>, i++, <span class="hljs-built_in">strlen</span>(str), str);<br></code></pre></td></tr></table></figure>
-
-
-<p>对空白字符的处理：</p>
-<p>1.所有空格、Tab等空白字符均被读取，不忽略。<br>2.按下回车键时，缓冲区末尾的换行符也被读取，字符串末尾将有一个换行符\n。例如，输入字符串hello，再按下回车，则读到的字符串长度为6。<br>3.fgets()函数会自动在字符串末尾加上\0结束符。</p>
-<p>第 2 个参数n指定了读取的最大长度。函数读到n-1个字符（包括换行符\n）就会停止，并在末尾加上\0结束符。剩余字符将残留在缓冲区。</p>
-<p>建议使用fgets()完全替代gets()。fgets()对应的输出函数是fputs()。</p>
-<h5 id="fgetc-getc"><a href="#fgetc-getc" class="headerlink" title="fgetc &amp; getc()"></a>fgetc &amp; getc()</h5><p>从指定输入流读取一个字符，输入可以是<code>stdin</code>，也可以是文件流，使用时需要显式指定。</p>
-<h5 id="getchar"><a href="#getchar" class="headerlink" title="getchar()"></a>getchar()</h5><p>从stdin读取一个字符。getchar()实际上也由fgetc()宏定义而来，只是默认输入流为stdin。</p>
-<p>用法示例：</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-type">char</span> a;<br>a = getchar();<br></code></pre></td></tr></table></figure>
-
-
-<p>getchar()常常用于清理缓冲区开头残留的换行符。当知道缓冲区开头有\n残留时，可以调用getchar()但不赋值给任何变量，即可实现冲刷掉\n的效果。</p>
-<p>getchar()对应的输出函数是putchar()。</p>
-<h3 id="c-的输入输出"><a href="#c-的输入输出" class="headerlink" title="c++的输入输出"></a>c++的输入输出</h3><h5 id="cin"><a href="#cin" class="headerlink" title="cin"></a>cin</h5><p>cin是 C++ 的标准输入流对象，即istream类的一个对象实例。cin有自己的缓冲区，但默认情况下是与stdin同步的，因此在 C++ 中可以混用 C++ 和 C 风格的输入输出（在不手动取消同步的情况下）。</p>
-<p>cin与stdin一样是行缓冲，即遇到换行符时才会将数据同步到输入缓冲区。</p>
-<p>cin的用法非常多，只列举常用的几种。最常用的就是使用&gt;&gt;符号（我认为该符号形象地体现了“流”的特点）。</p>
-<p>用法示例：</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-type">int</span> a, b;<br>cin &gt;&gt; a &gt;&gt; b;<br><span class="hljs-type">char</span> str[<span class="hljs-number">20</span>];<br>cin &gt;&gt; str;<br></code></pre></td></tr></table></figure>
-
-
-<p>cin对空白字符的处理与scanf一致。即：跳过开头空白字符，遇到空白字符停止读取，且空白字符（包括换行符）残留在缓冲区。</p>
-<p>如果不想跳过空白字符，可以使用流控制关键词noskipws（no skip white space），但这只对单个字符有效（类似于scanf中的%c）。</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-type">char</span> c;<br>cin &gt;&gt; noskipws &gt;&gt; c;<br></code></pre></td></tr></table></figure>
-
-<p>注意，cin对象属于命名空间std，如果想使用cin对象，必须在 C++ 文件开头写using namespace std，或者在每次用到的时候写成std::cin。</p>
-<h5 id="cin-get"><a href="#cin-get" class="headerlink" title="cin.get()"></a>cin.get()</h5><p>读取单个或指定长度的字符，包括空白字符。</p>
-<p>用法示例：</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-type">char</span> a, b;<br><span class="hljs-type">char</span> str[<span class="hljs-number">20</span>];<br><br><span class="hljs-comment">// 读取一个字符，读取失败时返回0，多余字符残留在缓冲区（包括换行符）</span><br>a = cin.<span class="hljs-built_in">get</span>();<br><span class="hljs-comment">// 读取一个字符，读取失败时返回EOF，多余字符残留在缓冲区（包括换行符）</span><br>cin.<span class="hljs-built_in">get</span>(b);<br><br><span class="hljs-comment">// 在遇到指定终止字符（参数3）前，至多读取n-1个（参数2）字符</span><br><span class="hljs-comment">// 当不指定终止字符时，默认为换行符\n</span><br><span class="hljs-comment">// 如果输入的字符个数小于等于n-1（不含终止字符），则终止字符不残留在缓冲区</span><br><span class="hljs-comment">// 如果输入的字符个数多于n-1（不含终止字符），则余下字符将残留在缓冲区</span><br>cin.<span class="hljs-built_in">get</span>(str, <span class="hljs-built_in">sizeof</span>(str), <span class="hljs-string">&#x27;\n&#x27;</span>);<br></code></pre></td></tr></table></figure>
-
-<p>cin.get()读取单个字符时，类似于 C 中的fgetc()，对空白字符的处理也与其一致。cin.get()读取的字符也可以赋值给整型变量。</p>
-<p>cin.get()读取指定长度个字符时，类似于 C 中的fgets()，但在换行符的处理上不同。它们都不会使换行符残留在缓冲区，但fgets()会将缓冲区末尾的换行符\n也写入字符串，而cin.get()会丢弃缓冲区末尾的\n。即：当输入test时，用fgets()读取得到的字符串长度为5，用cin.get()读取得到的字符串长度为4。</p>
-<h5 id="cin-getline"><a href="#cin-getline" class="headerlink" title="cin.getline()"></a>cin.getline()</h5><p>读取指定长度的字符，包括空白字符。</p>
-<p>用法示例：</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-type">char</span> str[<span class="hljs-number">20</span>];<br>cin.<span class="hljs-built_in">getline</span>(str, <span class="hljs-built_in">sizeof</span>(str));    <span class="hljs-comment">// 第3个参数也可以指定终止字符</span><br></code></pre></td></tr></table></figure>
-
-
-<p>cin.getline()与cin.get()指定读取长度时的用法几乎一样。区别在于，如果输入的字符个数大于指定的最大长度n-1（不含终止符），cin.get()会使余下字符残留在缓冲区，等待下次读取；而cin.getline()会给输入流设为 Fail 状态，在主动恢复之前，无法再进行正常输入。</p>
-<h5 id="getline"><a href="#getline" class="headerlink" title="getline()"></a>getline()</h5><p>getline()并不是标准输入流istream的函数，而是字符串流sstream的函数，只能用于读取数据给<strong>string类对象</strong>，使用时也需要包含头文件<string>。</p>
-<p>如果使用getline()读取标准输入流的数据，需要显式指定输入流。</p>
-<p>用法示例：</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs c++">string str;<br><span class="hljs-built_in">getline</span>(cin, str);<br></code></pre></td></tr></table></figure>
-
-
-<p>getline()会读取所有空白字符，且缓冲区末尾的换行符会被丢弃，不残留也不写到字符串结尾。同时，由于string对象的空间是动态分配的，所以会一次性将缓冲区读完，不存在读不完残留在缓冲区的问题。</p>
-<p>需要注意的是，假如缓冲区开头就是换行符（比如可能是上一次cin残留的），则getline()会直接读取到空字符串并结束，不会给键盘输入的机会。所以这种情况下要注意先清除开头的换行符。</p>
-<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>在 C 中，建议使用scanf()进行格式化读取，用fgets()读取整行，用fgetc()或getchar()读取单个字符。</p>
-<p>在 C++ 中，建议使用cin &gt;&gt;进行格式化读取，而cin.get()、cin.getline、getline(string)有各自的适用情况。</p>
-<p>注意fgets()和cin.get()在对换行符的清理方面有所区别。</p>
+<p>命令执行完毕后，会看到<code>successfully</code>字段，表示<code>.py</code>源码文件已成功生成在同路径下。<br><img src="https://bbs.kanxue.com/upload/attach/202306/909733_VB2KNPETFQ3TFW2.png" srcset="/img/loading.gif" lazyload alt="图片描述"></p>
 
                 
               </div>
@@ -376,6 +344,34 @@
             <div>
               <div class="post-metas my-3">
   
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E9%80%86%E5%90%91/" class="category-chain-item">逆向</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/pyc/" class="print-no-link">#pyc</a>
+      
+    </div>
   
 </div>
 
@@ -385,8 +381,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div></div>
-      <div>http://example.com/2024/01/23/编程/c++基本语法/</div>
+      <div>python 打包程序逆向</div>
+      <div>http://example.com/2024/03/09/逆向/python 打包程序逆向/</div>
     </div>
     <div class="license-meta">
       
@@ -398,7 +394,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2024年1月23日</div>
+          <div>2024年3月9日</div>
         </div>
       
       
@@ -430,9 +426,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2024/01/25/%E9%80%86%E5%90%91/python%20%E6%89%93%E5%8C%85%E7%A8%8B%E5%BA%8F%E9%80%86%E5%90%91/" title="">
+                      <a href="/2024/03/09/test/" title="test">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile"></span>
+                        <span class="hidden-mobile">test</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -440,8 +436,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2024/01/18/%E9%80%86%E5%90%91/%E8%8A%B1%E6%8C%87%E4%BB%A4/" title="">
-                        <span class="hidden-mobile"></span>
+                      <a href="/2024/03/09/pwn/linux%E7%A8%8B%E5%BA%8F%E7%9A%84%E4%BF%9D%E6%8A%A4%E6%9C%BA%E5%88%B6/" title="linux程序的保护机制">
+                        <span class="hidden-mobile">linux程序的保护机制</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>

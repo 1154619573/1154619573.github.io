@@ -16,21 +16,21 @@
   <meta name="author" content="John Doe">
   <meta name="keywords" content="">
   
-    <meta name="description" content="获取地址在漏洞利用的过程中，我们常常需要获取一些变量，函数的地址，以便于能够进行进一步的利用。这里我将获取地址的方法分为如下几类  直接寻找地址，即我们可以通过反编译等手段直接看到对应符号的地址。 泄漏地址，即需要我们通过控制程序的执行流来泄漏程序中的某些符号指针的内容，来获取对应的地址。 推测地址，这里我们一般常用的就是根据某个段内的符号之间的偏移是固定的，从而来推断一些新的符号的地址。 猜测地">
+    <meta name="description" content="唐三的博客">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Poseidon">
-<meta property="og:url" content="http://example.com/2024/02/29/pwn/%E8%8E%B7%E5%8F%96%E5%9C%B0%E5%9D%80/index.html">
+<meta property="og:title" content="test">
+<meta property="og:url" content="http://example.com/2024/03/09/test/index.html">
 <meta property="og:site_name" content="Poseidon">
-<meta property="og:description" content="获取地址在漏洞利用的过程中，我们常常需要获取一些变量，函数的地址，以便于能够进行进一步的利用。这里我将获取地址的方法分为如下几类  直接寻找地址，即我们可以通过反编译等手段直接看到对应符号的地址。 泄漏地址，即需要我们通过控制程序的执行流来泄漏程序中的某些符号指针的内容，来获取对应的地址。 推测地址，这里我们一般常用的就是根据某个段内的符号之间的偏移是固定的，从而来推断一些新的符号的地址。 猜测地">
+<meta property="og:description" content="唐三的博客">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2024-02-29T14:07:38.696Z">
-<meta property="article:modified_time" content="2024-02-29T14:07:38.697Z">
+<meta property="article:published_time" content="2024-03-09T10:56:50.000Z">
+<meta property="article:modified_time" content="2024-03-09T11:05:23.970Z">
 <meta property="article:author" content="John Doe">
 <meta name="twitter:card" content="summary_large_image">
   
   
   
-  <title>Poseidon</title>
+  <title>test - Poseidon</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -225,7 +225,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text=""></span>
+            <span id="subtitle" data-typed-text="test"></span>
           
         </div>
 
@@ -236,8 +236,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2024-02-29 22:07" pubdate>
-          2024年2月29日 晚上
+        <time datetime="2024-03-09 18:56" pubdate>
+          2024年3月9日 晚上
         </time>
       </span>
     
@@ -248,7 +248,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          1.5k 字
+          0 字
         
       </span>
     
@@ -259,7 +259,7 @@
         
         
         
-          13 分钟
+          1 分钟
         
       </span>
     
@@ -304,73 +304,12 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header"></h1>
+            <h1 id="seo-header">test</h1>
             
             
               <div class="markdown-body">
                 
-                <h2 id="获取地址"><a href="#获取地址" class="headerlink" title="获取地址"></a>获取地址</h2><p>在漏洞利用的过程中，我们常常需要获取一些变量，函数的地址，以便于能够进行进一步的利用。这里我将获取地址的方法分为如下几类</p>
-<ul>
-<li>直接寻找地址，即我们可以通过反编译等手段直接看到对应符号的地址。</li>
-<li>泄漏地址，即需要我们通过控制程序的执行流来泄漏程序中的某些符号指针的内容，来获取对应的地址。</li>
-<li>推测地址，这里我们一般常用的就是根据某个段内的符号之间的偏移是固定的，从而来推断一些新的符号的地址。</li>
-<li>猜测地址，一般主要指的是，我们需要自己去猜测对应符号的地址，这里伴随的往往就是暴力枚举了。</li>
-</ul>
-<p>上述几种方法，是一种递进地考虑方式，我们在获取相关符号的地址时，应保持这样的思考方式。</p>
-<p>在上面的几种方式中，我认为主要有两点核心思想</p>
-<ul>
-<li>充分利用代码本身的性质，比如程序某些代码的位置就是固定的，如不开启 PIE 时，代码段的位置；再比如，glibc 的后三位是固定的。</li>
-<li>充分利用相对偏移的性质，这是由于目前程序加载时往往加载的内存都是一段一段的，所以相对偏移往往是固定的。</li>
-</ul>
-<p>更加具体的，我们可以看如下的介绍。</p>
-<h3 id="直接寻找地址"><a href="#直接寻找地址" class="headerlink" title="直接寻找地址"></a>直接寻找地址</h3><p>程序中已经给出了相关变量或者函数的地址了。这时候，我们就可以直接进行利用了。</p>
-<p>这种情形往往适用于程序没有开启 PIE 的情况。</p>
-<h3 id="泄漏地址"><a href="#泄漏地址" class="headerlink" title="泄漏地址"></a>泄漏地址</h3><p>在泄漏地址的过程中，我们往往需要找到一些敏感的指针，这些指针里存储着要么就是我们想要的符号的地址，要么就是与我们想要的符号的地址相关。</p>
-<p>下面给出几个例子。</p>
-<h4 id="泄漏变量指针"><a href="#泄漏变量指针" class="headerlink" title="泄漏变量指针"></a>泄漏变量指针</h4><p>比如</p>
-<ol>
-<li>泄漏 main arena 中各种 bin 的头表指针，可能就可以获取堆中或者 glibc 中某个变量的地址。</li>
-</ol>
-<h4 id="泄漏-got-表"><a href="#泄漏-got-表" class="headerlink" title="泄漏 got 表"></a>泄漏 got 表</h4><p>有时候我们并不一定非得直接知道某个函数的地址，可以利用 GOT 表跳转到对应函数的地址。当然，如果我们非得知道这个函数的地址，我们可以利用 write，puts 等输出函数将 GOT 表中地址处对应的内容输出出来（<strong>前提是这个函数已经被解析一次了</strong>）。</p>
-<h4 id="ret2dl-resolve"><a href="#ret2dl-resolve" class="headerlink" title="ret2dl-resolve"></a>ret2dl-resolve</h4><p>当 ELF 文件采用动态链接时，got 表会采用延迟绑定技术。当第一次调用某个 libc 函数时，程序会调用_dl_runtime_resolve 函数对其地址解析。因此，我们可以利用栈溢出构造 ROP 链，伪造对其他函数（如：system）的解析。这也是我们在高级 rop 中介绍的技巧。</p>
-<h4 id="proc-self-maps"><a href="#proc-self-maps" class="headerlink" title="&#x2F;proc&#x2F;self&#x2F;maps"></a>&#x2F;proc&#x2F;self&#x2F;maps</h4><p>我们可以考虑通过读取程序的 <code>/proc/self/maps</code>来获取与程序相关的基地址。</p>
-<h3 id="推测地址"><a href="#推测地址" class="headerlink" title="推测地址"></a>推测地址</h3><p>在大多数情况下，我们都不能直接获取想要的函数的地址，往往需要进行一些地址的推测，正如上面所说，这里就重点依赖于符号间的偏移是固定的这一思想。</p>
-<h4 id="Stack-Related"><a href="#Stack-Related" class="headerlink" title="Stack Related"></a>Stack Related</h4><p>关于栈上的地址，其实我们大多时候并不需要具体的栈地址，但是我们可以根据栈的寻址方式，推测出栈上某个变量相对于 EBP 的位置。</p>
-<h4 id="Glibc-Related"><a href="#Glibc-Related" class="headerlink" title="Glibc Related"></a>Glibc Related</h4><p>这里主要考虑的是如何找到 Glibc 中相关的函数。</p>
-<h5 id="有-libc"><a href="#有-libc" class="headerlink" title="有 libc"></a>有 libc</h5><p>这时候我们就需要考虑利用 libc 中函数的基地址一样这个特性来寻找了。比如我们可以通过 __libc_start_main 的地址来泄漏 libc 在内存中的基地址。</p>
-<p><strong>注意：不要选择有 wapper 的函数，这样会使得函数的基地址计算不正确。</strong></p>
-<p>常见的有 wapper 的函数有？（待补充）。</p>
-<h5 id="无-libc"><a href="#无-libc" class="headerlink" title="无 libc"></a>无 libc</h5><p>其实，这种情况的解决策略分为两种</p>
-<ul>
-<li>想办法获取 libc</li>
-<li>想办法直接获取对应的地址。</li>
-</ul>
-<p>而对于想要泄露的地址，我们只是单纯地需要其对应的内容，所以 puts ， write，printf 均可以。</p>
-<ul>
-<li>puts，printf 会有 \x00 截断的问题</li>
-<li>write 可以指定长度输出的内容。</li>
-</ul>
-<p>下面是一些相应的方法</p>
-<h4 id="PWNLIB-DYNELF"><a href="#PWNLIB-DYNELF" class="headerlink" title="PWNLIB.DYNELF"></a>PWNLIB.DYNELF</h4><p>前提是我们可以泄露任意地址的内容。</p>
-<ul>
-<li><strong>如果要使用 write 函数泄露的话，一次最好多输出一些地址的内容，因为我们一般是只是不断地向高地址读内容，很有可能导致高地址的环境变量被覆盖，就会导致 shell 不能启动。</strong></li>
-</ul>
-<h4 id="LIBC-数据库"><a href="#LIBC-数据库" class="headerlink" title="LIBC 数据库"></a>LIBC 数据库</h4><figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs routeros"><span class="hljs-comment"># 更新数据库</span><br>./<span class="hljs-built_in">get</span><br><span class="hljs-comment"># 将已有libc添加到数据库中</span><br>./<span class="hljs-built_in">add</span> libc.so <br><span class="hljs-comment"># Find all the libc&#x27;s in the database that have the given names at the given addresses. </span><br>./<span class="hljs-built_in">find</span> function1 addr function2 addr<br><span class="hljs-comment"># Dump some useful offsets, given a libc ID. You can also provide your own names to dump.</span><br>./dump __libc_start_main_ret<span class="hljs-built_in"> system </span>dup2<br></code></pre></td></tr></table></figure>
-
-<p>去 libc 的数据库中找到对应的和已经出现的地址一样的 libc，这时候很有可能是一样的。</p>
-<p>也可以使用如下的在线网站:</p>
-<ul>
-<li><a target="_blank" rel="noopener" href="http://libcdb.com/">libcdb.com</a></li>
-<li><a target="_blank" rel="noopener" href="https://libc.blukat.me/">libc.blukat.me</a></li>
-</ul>
-<p><strong>当然，还有上面提到的 <a target="_blank" rel="noopener" href="https://github.com/lieanu/LibcSearcher%E3%80%82">https://github.com/lieanu/LibcSearcher。</a></strong></p>
-<h4 id="Heap-related"><a href="#Heap-related" class="headerlink" title="Heap related"></a>Heap related</h4><p>关于堆的一些地址的推测，这就需要我们比较详细地知道堆里分配了多少内存，目前泄漏出的内存地址是哪一块，进而获取堆的基地址，以及堆中相关的内存地址。</p>
-<h2 id="猜测地址"><a href="#猜测地址" class="headerlink" title="猜测地址"></a>猜测地址</h2><p>在一些比较奇怪的情况下，我们可能可以使用如下的方式</p>
-<ul>
-<li>使用一些暴力的方法来获取地址，比如 32 位时，地址随机化的空间比较小。</li>
-<li>当程序被特殊部署时，其不同的库被加载的位置可能会比较特殊。我们可以在本地尝试，然后猜测远程的情况。</li>
-</ul>
-
+                
                 
               </div>
             
@@ -387,8 +326,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div></div>
-      <div>http://example.com/2024/02/29/pwn/获取地址/</div>
+      <div>test</div>
+      <div>http://example.com/2024/03/09/test/</div>
     </div>
     <div class="license-meta">
       
@@ -400,7 +339,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2024年2月29日</div>
+          <div>2024年3月9日</div>
         </div>
       
       
@@ -432,18 +371,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2024/03/04/%E9%80%86%E5%90%91/rc4%E5%8A%A0%E5%AF%86/" title="">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile"></span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2024/02/29/pwn/linux%E7%A8%8B%E5%BA%8F%E7%9A%84%E4%BF%9D%E6%8A%A4%E6%9C%BA%E5%88%B6/" title="">
-                        <span class="hidden-mobile"></span>
+                      <a href="/2024/03/09/%E9%80%86%E5%90%91/python%20%E6%89%93%E5%8C%85%E7%A8%8B%E5%BA%8F%E9%80%86%E5%90%91/" title="python 打包程序逆向">
+                        <span class="hidden-mobile">python 打包程序逆向</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>

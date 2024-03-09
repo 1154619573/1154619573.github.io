@@ -16,21 +16,21 @@
   <meta name="author" content="John Doe">
   <meta name="keywords" content="">
   
-    <meta name="description" content="唐三的博客">
+    <meta name="description" content="一、常见的保护程序方法0011.CANNARY(栈保护)​	栈溢出保护是一种缓冲区溢出攻击缓解手段，当函数存在缓冲区溢出攻击漏洞时，攻击者可以覆盖栈上的返回地址来让shellcode能够得到执行。当启用栈保护后，函数开始执行的时候会先往栈里插入cookie信息，当函数真正返回的时候会验证cookie信息是否合法，如果不合法就停止程序运行。攻击者在覆盖返回地址的时候往往也会将cookie信息给覆盖掉">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Poseidon">
-<meta property="og:url" content="http://example.com/2024/02/29/pwn/linux%E7%A8%8B%E5%BA%8F%E5%B8%B8%E7%94%A8%E4%BF%9D%E6%8A%A4%E6%9C%BA%E5%88%B6/index.html">
+<meta property="og:title" content="linux程序的保护机制">
+<meta property="og:url" content="http://example.com/2024/03/09/pwn/linux%E7%A8%8B%E5%BA%8F%E7%9A%84%E4%BF%9D%E6%8A%A4%E6%9C%BA%E5%88%B6/index.html">
 <meta property="og:site_name" content="Poseidon">
-<meta property="og:description" content="唐三的博客">
+<meta property="og:description" content="一、常见的保护程序方法0011.CANNARY(栈保护)​	栈溢出保护是一种缓冲区溢出攻击缓解手段，当函数存在缓冲区溢出攻击漏洞时，攻击者可以覆盖栈上的返回地址来让shellcode能够得到执行。当启用栈保护后，函数开始执行的时候会先往栈里插入cookie信息，当函数真正返回的时候会验证cookie信息是否合法，如果不合法就停止程序运行。攻击者在覆盖返回地址的时候往往也会将cookie信息给覆盖掉">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2024-02-29T10:42:52.898Z">
-<meta property="article:modified_time" content="2024-02-29T10:42:52.898Z">
+<meta property="article:published_time" content="2024-03-09T10:56:50.000Z">
+<meta property="article:modified_time" content="2024-03-09T11:04:01.761Z">
 <meta property="article:author" content="John Doe">
 <meta name="twitter:card" content="summary_large_image">
   
   
   
-  <title>Poseidon</title>
+  <title>linux程序的保护机制 - Poseidon</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -225,7 +225,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text=""></span>
+            <span id="subtitle" data-typed-text="linux程序的保护机制"></span>
           
         </div>
 
@@ -236,8 +236,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2024-02-29 18:42" pubdate>
-          2024年2月29日 晚上
+        <time datetime="2024-03-09 18:56" pubdate>
+          2024年3月9日 晚上
         </time>
       </span>
     
@@ -248,7 +248,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          0 字
+          660 字
         
       </span>
     
@@ -259,7 +259,7 @@
         
         
         
-          1 分钟
+          6 分钟
         
       </span>
     
@@ -304,12 +304,22 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header"></h1>
+            <h1 id="seo-header">linux程序的保护机制</h1>
             
             
               <div class="markdown-body">
                 
-                
+                <h3 id="一、常见的保护程序方法"><a href="#一、常见的保护程序方法" class="headerlink" title="一、常见的保护程序方法"></a>一、常见的保护程序方法</h3><h4 id="0011-CANNARY-栈保护"><a href="#0011-CANNARY-栈保护" class="headerlink" title="0011.CANNARY(栈保护)"></a>0011.CANNARY(栈保护)</h4><p>​	栈溢出保护是一种缓冲区溢出攻击缓解手段，当函数存在缓冲区溢出攻击漏洞时，攻击者可以覆盖栈上的返回地址来让shellcode能够得到执行。当启用栈保护后，函数开始执行的时候会先往栈里插入cookie信息，当函数真正返回的时候会验证cookie信息是否合法，如果不合法就停止程序运行。攻击者在覆盖返回地址的时候往往也会将cookie信息给覆盖掉，导致栈保护检查失败而阻止shellcode的执行。在Linux中我们将cookie信息称为canary。</p>
+<h4 id="2-FORTIFY"><a href="#2-FORTIFY" class="headerlink" title="2.FORTIFY"></a>2.FORTIFY</h4><p>​	fority其实非常轻微的检查，用于检查是否存在缓冲区溢出的错误。适用情形是程序采用大量的字符串或者内存操作函数，如memcpy，memset，stpcpy，strcpy，strncpy，strcat，strncat，sprintf，snprintf，vsprintf，vsnprintf，gets以及宽字符的变体。</p>
+<p><em>FORTIFY_SOURCE设为1，并且将编译器设置为优化1(<em>gcc -O1</em>)，以及出现上述情形，那么程序编译时就会进行检查但又不会改变程序功能</em><br>FORTIFY_SOURCE设为2，有些检查功能会加入，但是这可能导致程序崩溃。</p>
+<p>gcc -D_FORTIFY_SOURCE&#x3D;1<code>仅仅只会在编译时进行检查 (特别像某些头文件</code>#include &lt;string.h&gt;<code>)</code><br>gcc -D_FORTIFY_SOURCE&#x3D;2&#96; 程序执行时也会有检查 (如果检查到缓冲区溢出，就终止程序)</p>
+<h4 id="3-NX（DEP）"><a href="#3-NX（DEP）" class="headerlink" title="3.NX（DEP）"></a>3.NX（DEP）</h4><p>​	NX即No-eXecute（不可执行）的意思，NX（DEP）的基本原理是将数据所在内存页标识为不可执行，当程序溢出成功转入shellcode时，程序会尝试在数据页面上执行指令，此时CPU就会抛出异常，而不是去执行恶意指令。</p>
+<h4 id="4-PIE（ASLR）"><a href="#4-PIE（ASLR）" class="headerlink" title="4.PIE（ASLR）"></a>4.PIE（ASLR）</h4><p>一般情况下NX（Windows平台上称其为DEP）和地址空间分布随机化（ASLR）会同时工作。<br>内存地址随机化机制（address space layout randomization)，有以下三种情况</p>
+<figure class="highlight basic"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs basic"><span class="hljs-symbol">0 </span>- 表示关闭进程地址空间随机化。<br><span class="hljs-symbol">1 </span>- 表示将mmap的基址，stack和vdso页面随机化。<br><span class="hljs-symbol">2 </span>- 表示在<span class="hljs-number">1</span>的基础上增加栈（heap）的随机化。<br></code></pre></td></tr></table></figure>
+
+<p>可以防范基于Ret2libc方式的针对DEP的攻击。ASLR和DEP配合使用，能有效阻止攻击者在堆栈上运行恶意代码。</p>
+<p>Built as PIE：位置独立的可执行区域（position-independent executables）。这样使得在利用缓冲溢出和移动操作系统中存在的其他内存崩溃缺陷时采用面向返回的编程（return-oriented programming）方法变得难得多。</p>
+
                 
               </div>
             
@@ -326,8 +336,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div></div>
-      <div>http://example.com/2024/02/29/pwn/linux程序常用保护机制/</div>
+      <div>linux程序的保护机制</div>
+      <div>http://example.com/2024/03/09/pwn/linux程序的保护机制/</div>
     </div>
     <div class="license-meta">
       
@@ -339,7 +349,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2024年2月29日</div>
+          <div>2024年3月9日</div>
         </div>
       
       
@@ -371,9 +381,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2024/02/29/pwn/linux%E7%A8%8B%E5%BA%8F%E7%9A%84%E4%BF%9D%E6%8A%A4%E6%9C%BA%E5%88%B6/" title="">
+                      <a href="/2024/03/09/%E9%80%86%E5%90%91/python%20%E6%89%93%E5%8C%85%E7%A8%8B%E5%BA%8F%E9%80%86%E5%90%91/" title="python 打包程序逆向">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile"></span>
+                        <span class="hidden-mobile">python 打包程序逆向</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -381,8 +391,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2024/02/23/%E9%80%86%E5%90%91/python%20%E8%99%9A%E6%8B%9F%E7%8E%AF%E5%A2%83/" title="">
-                        <span class="hidden-mobile"></span>
+                      <a href="/2024/03/09/pwn/%E8%8E%B7%E5%8F%96%E5%9C%B0%E5%9D%80/" title="获取地址">
+                        <span class="hidden-mobile">获取地址</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
