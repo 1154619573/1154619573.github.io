@@ -4,6 +4,69 @@
   
   
   <entry>
+    <title>rop</title>
+    <link href="/2024/03/11/rop/"/>
+    <url>/2024/03/11/rop/</url>
+    
+    <content type="html"><![CDATA[]]></content>
+    
+    
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>pwntools</title>
+    <link href="/2024/03/10/pwn/pwntools/"/>
+    <url>/2024/03/10/pwn/pwntools/</url>
+    
+    <content type="html"><![CDATA[<h3 id="asm汇编与反汇编"><a href="#asm汇编与反汇编" class="headerlink" title="asm汇编与反汇编"></a>asm汇编与反汇编</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-meta">&gt;&gt;&gt; </span>asm(<span class="hljs-string">&#x27;mov eax, 0&#x27;</span>)   <span class="hljs-comment">#汇编</span><br><span class="hljs-string">&#x27;\xb8\x00\x00\x00\x00&#x27;</span><br><span class="hljs-meta">&gt;&gt;&gt; </span>disasm(<span class="hljs-string">&#x27;\xb8\x0b\x00\x00\x00&#x27;</span>)  <span class="hljs-comment">#反汇编</span><br><span class="hljs-string">&#x27;   0:   b8 0b 00 00 00          mov    eax,0xb&#x27;</span><br></code></pre></td></tr></table></figure><h3 id="elf文件操作"><a href="#elf文件操作" class="headerlink" title="elf文件操作"></a>elf文件操作</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-meta">&gt;&gt;&gt; </span>e = ELF(<span class="hljs-string">&#x27;/bin/cat&#x27;</span>)<br><span class="hljs-meta">&gt;&gt;&gt; </span><span class="hljs-built_in">print</span> <span class="hljs-built_in">hex</span>(e.address)  <span class="hljs-comment"># 文件装载的基地址</span><br><span class="hljs-number">0x400000</span><br><span class="hljs-meta">&gt;&gt;&gt; </span><span class="hljs-built_in">print</span> <span class="hljs-built_in">hex</span>(e.symbols[<span class="hljs-string">&#x27;write&#x27;</span>]) <span class="hljs-comment"># 函数地址</span><br><span class="hljs-number">0x401680</span><br><span class="hljs-meta">&gt;&gt;&gt; </span><span class="hljs-built_in">print</span> <span class="hljs-built_in">hex</span>(e.got[<span class="hljs-string">&#x27;write&#x27;</span>]) <span class="hljs-comment"># GOT表的地址</span><br><span class="hljs-number">0x60b070</span><br><span class="hljs-meta">&gt;&gt;&gt; </span><span class="hljs-built_in">print</span> <span class="hljs-built_in">hex</span>(e.plt[<span class="hljs-string">&#x27;write&#x27;</span>]) <span class="hljs-comment"># PLT的地址</span><br><span class="hljs-number">0x401680</span><br></code></pre></td></tr></table></figure><h3 id="shellcode使用"><a href="#shellcode使用" class="headerlink" title="shellcode使用"></a>shellcode使用</h3><p><strong>pwnlib.shellcraft模块</strong>包含<strong>生成shell代码</strong>的函数。<br>其中的子模块声明结构，比如</p><ul><li>ARM架构: shellcraft.arm</li><li>AMD64架构: shellcraft.amd64</li><li>Intel 80386架构: shellcraft.i386</li><li>通用: shellcraft.common</li></ul><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs python"><br>context(arch=<span class="hljs-string">&#x27;i386&#x27;</span>, os=<span class="hljs-string">&#x27;linux&#x27;</span>)<br>shellcode = asm(shellcraft.sh())<br></code></pre></td></tr></table></figure><h3 id="remote-process读写接口"><a href="#remote-process读写接口" class="headerlink" title="remote&#x2F;process读写接口"></a>remote&#x2F;process读写接口</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment"># 第一种连接方式，通过ip和port去连接</span><br>conn = remote(<span class="hljs-string">&#x27;127.0.0.1&#x27;</span>, <span class="hljs-number">8888</span>)  <br><span class="hljs-comment"># 第二种连接方式，通过ssh连接</span><br>shell = ssh(host=<span class="hljs-string">&#x27;192.168.14.144&#x27;</span>, user=<span class="hljs-string">&#x27;root&#x27;</span>, port=<span class="hljs-number">2222</span>, password=<span class="hljs-string">&#x27;123456&#x27;</span>)<br><br><span class="hljs-comment">#接受或者发送数据</span><br>conn.send(data) <span class="hljs-comment">#发送数据</span><br>conn.sendline(data) <span class="hljs-comment">#发送一行数据，相当于在数据后面加\n</span><br><span class="hljs-comment">#接收数据，numb制定接收的字节，timeout指定超时</span><br>conn.recv(numb = <span class="hljs-number">2048</span>, timeout = default)<br><span class="hljs-comment">#接受一行数据，keepends为是否保留行尾的\n</span><br>conn.recvline(keepends=<span class="hljs-literal">True</span>)<br><span class="hljs-comment">#接受数据直到我们设置的标志出现</span><br>conn.recvuntil(<span class="hljs-string">&quot;Hello,World\n&quot;</span>,drop=fasle) <br>conn.recvall()  <span class="hljs-comment">#一直接收直到 EOF</span><br>conn.recvrepeat(timeout = default)  <span class="hljs-comment">#持续接受直到EOF或timeout</span><br><span class="hljs-comment">#直接进行交互，相当于回到shell的模式，在取得shell之后使用</span><br>conn.interactive()<br></code></pre></td></tr></table></figure>]]></content>
+    
+    
+    <categories>
+      
+      <category>pwn</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>工具</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>ret2syscall</title>
+    <link href="/2024/03/09/pwn/ret2syscall/"/>
+    <url>/2024/03/09/pwn/ret2syscall/</url>
+    
+    <content type="html"><![CDATA[<h3 id="序言："><a href="#序言：" class="headerlink" title="序言："></a>序言：</h3><p>在NX保护机制被打开无法使用ret2shellcode，且代码中没有可利用片段时无法使用ret2text时，可以用系统调用。</p>]]></content>
+    
+    
+    <categories>
+      
+      <category>pwn</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>rop</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>获取地址</title>
     <link href="/2024/03/09/pwn/%E8%8E%B7%E5%8F%96%E5%9C%B0%E5%9D%80/"/>
     <url>/2024/03/09/pwn/%E8%8E%B7%E5%8F%96%E5%9C%B0%E5%9D%80/</url>
