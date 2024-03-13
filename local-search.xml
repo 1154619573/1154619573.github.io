@@ -4,9 +4,9 @@
   
   
   <entry>
-    <title>rop</title>
-    <link href="/2024/03/11/rop/"/>
-    <url>/2024/03/11/rop/</url>
+    <title>pwndbg调试方法</title>
+    <link href="/2024/03/13/pwndbg%E8%B0%83%E8%AF%95%E6%96%B9%E6%B3%95/"/>
+    <url>/2024/03/13/pwndbg%E8%B0%83%E8%AF%95%E6%96%B9%E6%B3%95/</url>
     
     <content type="html"><![CDATA[]]></content>
     
@@ -34,31 +34,6 @@
     <tags>
       
       <tag>工具</tag>
-      
-    </tags>
-    
-  </entry>
-  
-  
-  
-  <entry>
-    <title>ret2syscall</title>
-    <link href="/2024/03/09/pwn/ret2syscall/"/>
-    <url>/2024/03/09/pwn/ret2syscall/</url>
-    
-    <content type="html"><![CDATA[<h3 id="序言："><a href="#序言：" class="headerlink" title="序言："></a>序言：</h3><p>在NX保护机制被打开无法使用ret2shellcode，且代码中没有可利用片段时无法使用ret2text时，可以用系统调用。</p>]]></content>
-    
-    
-    <categories>
-      
-      <category>pwn</category>
-      
-    </categories>
-    
-    
-    <tags>
-      
-      <tag>rop</tag>
       
     </tags>
     
