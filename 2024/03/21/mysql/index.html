@@ -16,22 +16,23 @@
   <meta name="author" content="TangSan">
   <meta name="keywords" content="">
   
-    <meta name="description" content="asm汇编与反汇编1234&gt;&gt;&gt; asm(&amp;#x27;mov eax, 0&amp;#x27;)   #汇编&amp;#x27;\xb8\x00\x00\x00\x00&amp;#x27;&gt;&gt;&gt; disasm(&amp;#x27;\xb8\x0b\x00\x00\x00&amp;#x27;)  #反汇编&amp;#x27;   0:   b8 0b 00 00 00          mov    eax,0">
+    <meta name="description" content="进入数据库命令：mysql -u root -p 常用的增删改查命令 123456use database_name					进入database_name数据库show databases 						查看所有的数据库show tables 							查看当前数据库下的所有表desc table_name						查看table_name表的相关信息select * from table_">
 <meta property="og:type" content="article">
-<meta property="og:title" content="pwntools">
-<meta property="og:url" content="http://example.com/2024/03/10/pwn/pwntools/index.html">
+<meta property="og:title" content="mysql">
+<meta property="og:url" content="http://example.com/2024/03/21/mysql/index.html">
 <meta property="og:site_name" content="Poseidon">
-<meta property="og:description" content="asm汇编与反汇编1234&gt;&gt;&gt; asm(&amp;#x27;mov eax, 0&amp;#x27;)   #汇编&amp;#x27;\xb8\x00\x00\x00\x00&amp;#x27;&gt;&gt;&gt; disasm(&amp;#x27;\xb8\x0b\x00\x00\x00&amp;#x27;)  #反汇编&amp;#x27;   0:   b8 0b 00 00 00          mov    eax,0">
+<meta property="og:description" content="进入数据库命令：mysql -u root -p 常用的增删改查命令 123456use database_name					进入database_name数据库show databases 						查看所有的数据库show tables 							查看当前数据库下的所有表desc table_name						查看table_name表的相关信息select * from table_">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2024-03-10T13:52:21.000Z">
-<meta property="article:modified_time" content="2024-03-11T13:24:32.907Z">
+<meta property="article:published_time" content="2024-03-21T02:14:45.000Z">
+<meta property="article:modified_time" content="2024-03-24T10:19:51.411Z">
 <meta property="article:author" content="TangSan">
-<meta property="article:tag" content="工具">
+<meta property="article:tag" content="数据库">
+<meta property="article:tag" content="mysql">
 <meta name="twitter:card" content="summary_large_image">
   
   
   
-  <title>pwntools - Poseidon</title>
+  <title>mysql - Poseidon</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -226,7 +227,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="pwntools"></span>
+            <span id="subtitle" data-typed-text="mysql"></span>
           
         </div>
 
@@ -237,8 +238,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2024-03-10 21:52" pubdate>
-          2024年3月10日 晚上
+        <time datetime="2024-03-21 10:14" pubdate>
+          2024年3月21日 上午
         </time>
       </span>
     
@@ -249,7 +250,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          370 字
+          266 字
         
       </span>
     
@@ -260,7 +261,7 @@
         
         
         
-          4 分钟
+          3 分钟
         
       </span>
     
@@ -305,25 +306,19 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">pwntools</h1>
+            <h1 id="seo-header">mysql</h1>
             
             
               <div class="markdown-body">
                 
-                <h3 id="asm汇编与反汇编"><a href="#asm汇编与反汇编" class="headerlink" title="asm汇编与反汇编"></a>asm汇编与反汇编</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-meta">&gt;&gt;&gt; </span>asm(<span class="hljs-string">&#x27;mov eax, 0&#x27;</span>)   <span class="hljs-comment">#汇编</span><br><span class="hljs-string">&#x27;\xb8\x00\x00\x00\x00&#x27;</span><br><span class="hljs-meta">&gt;&gt;&gt; </span>disasm(<span class="hljs-string">&#x27;\xb8\x0b\x00\x00\x00&#x27;</span>)  <span class="hljs-comment">#反汇编</span><br><span class="hljs-string">&#x27;   0:   b8 0b 00 00 00          mov    eax,0xb&#x27;</span><br></code></pre></td></tr></table></figure>
+                <p>进入数据库命令：mysql -u root -p</p>
+<p>常用的增删改查命令</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs sql">use database_name					进入database_name数据库<br><span class="hljs-keyword">show</span> databases 						查看所有的数据库<br><span class="hljs-keyword">show</span> tables 							查看当前数据库下的所有表<br><span class="hljs-keyword">desc</span> table_name						查看table_name表的相关信息<br><span class="hljs-keyword">select</span> <span class="hljs-operator">*</span> <span class="hljs-keyword">from</span> table_name 	查看table_name表的所有字段<br><br></code></pre></td></tr></table></figure>
 
-<h3 id="elf文件操作"><a href="#elf文件操作" class="headerlink" title="elf文件操作"></a>elf文件操作</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-meta">&gt;&gt;&gt; </span>e = ELF(<span class="hljs-string">&#x27;/bin/cat&#x27;</span>)<br><span class="hljs-meta">&gt;&gt;&gt; </span><span class="hljs-built_in">print</span> <span class="hljs-built_in">hex</span>(e.address)  <span class="hljs-comment"># 文件装载的基地址</span><br><span class="hljs-number">0x400000</span><br><span class="hljs-meta">&gt;&gt;&gt; </span><span class="hljs-built_in">print</span> <span class="hljs-built_in">hex</span>(e.symbols[<span class="hljs-string">&#x27;write&#x27;</span>]) <span class="hljs-comment"># 函数地址</span><br><span class="hljs-number">0x401680</span><br><span class="hljs-meta">&gt;&gt;&gt; </span><span class="hljs-built_in">print</span> <span class="hljs-built_in">hex</span>(e.got[<span class="hljs-string">&#x27;write&#x27;</span>]) <span class="hljs-comment"># GOT表的地址</span><br><span class="hljs-number">0x60b070</span><br><span class="hljs-meta">&gt;&gt;&gt; </span><span class="hljs-built_in">print</span> <span class="hljs-built_in">hex</span>(e.plt[<span class="hljs-string">&#x27;write&#x27;</span>]) <span class="hljs-comment"># PLT的地址</span><br><span class="hljs-number">0x401680</span><br></code></pre></td></tr></table></figure>
+<p>1 创建表<br>创建表的SQL语句格式如下：<br>CREATE TABLE 表名(属性名 数据类型 [完整性约束条件],<br>                   属性名 数据类型 [完整性约束条件],<br>                   …<br>                   属性名 数据类型 [完整性约束条件]<br>             );<br>注意创建表的时候要选择合适的数据类型，而且还可以给字段添加完整性约束条件，比如主键、非空键等，完整的约束条件如下所示：</p>
+<p>约束条件说明</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">PRIMARY</span> KEY				修饰的属性为该表的主键，可以区分不同的行记录<br><span class="hljs-keyword">FOREIGN</span> KEY				修饰的属性为该表的外键，关联了父表的主键<br><span class="hljs-keyword">NOT</span> <span class="hljs-keyword">NULL</span>					表示该属性不能为空<br><span class="hljs-keyword">UNIQUE</span>						表示该属性的值是唯一的<br>AUTO_INCREMENT		MySQL特色，表示该属性是自增的，整数类型<br><span class="hljs-keyword">DEFAULT</span>						给属性设置默认值<br></code></pre></td></tr></table></figure>
 
-<h3 id="shellcode使用"><a href="#shellcode使用" class="headerlink" title="shellcode使用"></a>shellcode使用</h3><p><strong>pwnlib.shellcraft模块</strong>包含<strong>生成shell代码</strong>的函数。<br>其中的子模块声明结构，比如</p>
-<ul>
-<li>ARM架构: shellcraft.arm</li>
-<li>AMD64架构: shellcraft.amd64</li>
-<li>Intel 80386架构: shellcraft.i386</li>
-<li>通用: shellcraft.common</li>
-</ul>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs python"><br>context(arch=<span class="hljs-string">&#x27;i386&#x27;</span>, os=<span class="hljs-string">&#x27;linux&#x27;</span>)<br>shellcode = asm(shellcraft.sh())<br></code></pre></td></tr></table></figure>
-
-<h3 id="remote-process读写接口"><a href="#remote-process读写接口" class="headerlink" title="remote&#x2F;process读写接口"></a>remote&#x2F;process读写接口</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment"># 第一种连接方式，通过ip和port去连接</span><br>conn = remote(<span class="hljs-string">&#x27;127.0.0.1&#x27;</span>, <span class="hljs-number">8888</span>)  <br><span class="hljs-comment"># 第二种连接方式，通过ssh连接</span><br>shell = ssh(host=<span class="hljs-string">&#x27;192.168.14.144&#x27;</span>, user=<span class="hljs-string">&#x27;root&#x27;</span>, port=<span class="hljs-number">2222</span>, password=<span class="hljs-string">&#x27;123456&#x27;</span>)<br><br><span class="hljs-comment">#接受或者发送数据</span><br>conn.send(data) <span class="hljs-comment">#发送数据</span><br>conn.sendline(data) <span class="hljs-comment">#发送一行数据，相当于在数据后面加\n</span><br><span class="hljs-comment">#接收数据，numb制定接收的字节，timeout指定超时</span><br>conn.recv(numb = <span class="hljs-number">2048</span>, timeout = default)<br><span class="hljs-comment">#接受一行数据，keepends为是否保留行尾的\n</span><br>conn.recvline(keepends=<span class="hljs-literal">True</span>)<br><span class="hljs-comment">#接受数据直到我们设置的标志出现</span><br>conn.recvuntil(<span class="hljs-string">&quot;Hello,World\n&quot;</span>,drop=fasle) <br>conn.recvall()  <span class="hljs-comment">#一直接收直到 EOF</span><br>conn.recvrepeat(timeout = default)  <span class="hljs-comment">#持续接受直到EOF或timeout</span><br><span class="hljs-comment">#直接进行交互，相当于回到shell的模式，在取得shell之后使用</span><br>conn.interactive()<br></code></pre></td></tr></table></figure>
 
                 
               </div>
@@ -332,32 +327,13 @@
             <div>
               <div class="post-metas my-3">
   
-    <div class="post-meta mr-3 d-flex align-items-center">
-      <i class="iconfont icon-category"></i>
-      
-
-<span class="category-chains">
-  
-  
-    
-      <span class="category-chain">
-        
-  <a href="/categories/pwn/" class="category-chain-item">pwn</a>
-  
-  
-
-      </span>
-    
-  
-</span>
-
-    </div>
-  
   
     <div class="post-meta">
       <i class="iconfont icon-tags"></i>
       
-        <a href="/tags/%E5%B7%A5%E5%85%B7/" class="print-no-link">#工具</a>
+        <a href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/" class="print-no-link">#数据库</a>
+      
+        <a href="/tags/mysql/" class="print-no-link">#mysql</a>
       
     </div>
   
@@ -369,8 +345,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>pwntools</div>
-      <div>http://example.com/2024/03/10/pwn/pwntools/</div>
+      <div>mysql</div>
+      <div>http://example.com/2024/03/21/mysql/</div>
     </div>
     <div class="license-meta">
       
@@ -382,7 +358,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2024年3月10日</div>
+          <div>2024年3月21日</div>
         </div>
       
       
@@ -414,18 +390,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2024/03/11/pwn/rop/" title="rop">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">rop</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2024/03/09/pwn/%E8%8E%B7%E5%8F%96%E5%9C%B0%E5%9D%80/" title="获取地址">
-                        <span class="hidden-mobile">获取地址</span>
+                      <a href="/2024/03/20/%E7%BC%96%E7%A8%8B/bitset/" title="bitset">
+                        <span class="hidden-mobile">bitset</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>

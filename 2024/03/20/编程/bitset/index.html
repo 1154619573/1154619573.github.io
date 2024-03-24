@@ -16,22 +16,22 @@
   <meta name="author" content="TangSan">
   <meta name="keywords" content="">
   
-    <meta name="description" content="asm汇编与反汇编1234&gt;&gt;&gt; asm(&amp;#x27;mov eax, 0&amp;#x27;)   #汇编&amp;#x27;\xb8\x00\x00\x00\x00&amp;#x27;&gt;&gt;&gt; disasm(&amp;#x27;\xb8\x0b\x00\x00\x00&amp;#x27;)  #反汇编&amp;#x27;   0:   b8 0b 00 00 00          mov    eax,0">
+    <meta name="description" content="std::bitset 是 C++ 标准库中的一个类，用于表示二进制位序列。它提供了一种方便的方式来处理二进制数据，尤其适用于位运算操作。 std::bitset 类型表示一个固定长度的位序列，每个位都只能是 0 或 1。这个固定长度在创建对象时指定，并且不能在运行时更改。类似于整数类型，std::bitset 支持多种操作，包括位运算、位查询和位设置。 下面是 std::bitset 类型的创建">
 <meta property="og:type" content="article">
-<meta property="og:title" content="pwntools">
-<meta property="og:url" content="http://example.com/2024/03/10/pwn/pwntools/index.html">
+<meta property="og:title" content="bitset">
+<meta property="og:url" content="http://example.com/2024/03/20/%E7%BC%96%E7%A8%8B/bitset/index.html">
 <meta property="og:site_name" content="Poseidon">
-<meta property="og:description" content="asm汇编与反汇编1234&gt;&gt;&gt; asm(&amp;#x27;mov eax, 0&amp;#x27;)   #汇编&amp;#x27;\xb8\x00\x00\x00\x00&amp;#x27;&gt;&gt;&gt; disasm(&amp;#x27;\xb8\x0b\x00\x00\x00&amp;#x27;)  #反汇编&amp;#x27;   0:   b8 0b 00 00 00          mov    eax,0">
+<meta property="og:description" content="std::bitset 是 C++ 标准库中的一个类，用于表示二进制位序列。它提供了一种方便的方式来处理二进制数据，尤其适用于位运算操作。 std::bitset 类型表示一个固定长度的位序列，每个位都只能是 0 或 1。这个固定长度在创建对象时指定，并且不能在运行时更改。类似于整数类型，std::bitset 支持多种操作，包括位运算、位查询和位设置。 下面是 std::bitset 类型的创建">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2024-03-10T13:52:21.000Z">
-<meta property="article:modified_time" content="2024-03-11T13:24:32.907Z">
+<meta property="article:published_time" content="2024-03-20T03:51:28.000Z">
+<meta property="article:modified_time" content="2024-03-24T10:13:00.962Z">
 <meta property="article:author" content="TangSan">
-<meta property="article:tag" content="工具">
+<meta property="article:tag" content="密码">
 <meta name="twitter:card" content="summary_large_image">
   
   
   
-  <title>pwntools - Poseidon</title>
+  <title>bitset - Poseidon</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -226,7 +226,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="pwntools"></span>
+            <span id="subtitle" data-typed-text="bitset"></span>
           
         </div>
 
@@ -237,8 +237,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2024-03-10 21:52" pubdate>
-          2024年3月10日 晚上
+        <time datetime="2024-03-20 11:51" pubdate>
+          2024年3月20日 中午
         </time>
       </span>
     
@@ -249,7 +249,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          370 字
+          1k 字
         
       </span>
     
@@ -260,7 +260,7 @@
         
         
         
-          4 分钟
+          9 分钟
         
       </span>
     
@@ -305,25 +305,44 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">pwntools</h1>
+            <h1 id="seo-header">bitset</h1>
             
             
               <div class="markdown-body">
                 
-                <h3 id="asm汇编与反汇编"><a href="#asm汇编与反汇编" class="headerlink" title="asm汇编与反汇编"></a>asm汇编与反汇编</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-meta">&gt;&gt;&gt; </span>asm(<span class="hljs-string">&#x27;mov eax, 0&#x27;</span>)   <span class="hljs-comment">#汇编</span><br><span class="hljs-string">&#x27;\xb8\x00\x00\x00\x00&#x27;</span><br><span class="hljs-meta">&gt;&gt;&gt; </span>disasm(<span class="hljs-string">&#x27;\xb8\x0b\x00\x00\x00&#x27;</span>)  <span class="hljs-comment">#反汇编</span><br><span class="hljs-string">&#x27;   0:   b8 0b 00 00 00          mov    eax,0xb&#x27;</span><br></code></pre></td></tr></table></figure>
+                <p><code>std::bitset</code> 是 C++ 标准库中的一个类，用于表示二进制位序列。它提供了一种方便的方式来处理二进制数据，尤其适用于位运算操作。</p>
+<p><code>std::bitset</code> 类型表示一个固定长度的位序列，每个位都只能是 0 或 1。这个固定长度在创建对象时指定，并且不能在运行时更改。类似于整数类型，<code>std::bitset</code> 支持多种操作，包括位运算、位查询和位设置。</p>
+<p>下面是 <code>std::bitset</code> 类型的创建方式：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;bitset&gt;</span></span><br><br>std::bitset&lt;N&gt; bitset1; <span class="hljs-comment">// 创建一个长度为 N 的 bitset，所有位都被初始化为 0</span><br><span class="hljs-function">std::bitset&lt;N&gt; <span class="hljs-title">bitset2</span><span class="hljs-params">(value)</span></span>; <span class="hljs-comment">// 使用二进制整数 value 初始化一个长度为 N 的 bitset</span><br><span class="hljs-function">std::bitset&lt;N&gt; <span class="hljs-title">bitset3</span><span class="hljs-params">(string)</span></span>; <span class="hljs-comment">// 使用二进制字符串 string 初始化一个长度为 N 的 bitset</span><br><span class="hljs-function">std::bitset&lt;N&gt; <span class="hljs-title">bitset4</span><span class="hljs-params">(bitset)</span></span>; <span class="hljs-comment">// 使用另一个 bitset 初始化一个长度为 N 的 bitset</span><br><br>std::bitset&lt;N&gt; bitset5&#123;hexnum&#125;;<span class="hljs-comment">//在c11的标准中，可以直接使用十六进制数转化为相应的二进制数</span><br><br></code></pre></td></tr></table></figure>
 
-<h3 id="elf文件操作"><a href="#elf文件操作" class="headerlink" title="elf文件操作"></a>elf文件操作</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-meta">&gt;&gt;&gt; </span>e = ELF(<span class="hljs-string">&#x27;/bin/cat&#x27;</span>)<br><span class="hljs-meta">&gt;&gt;&gt; </span><span class="hljs-built_in">print</span> <span class="hljs-built_in">hex</span>(e.address)  <span class="hljs-comment"># 文件装载的基地址</span><br><span class="hljs-number">0x400000</span><br><span class="hljs-meta">&gt;&gt;&gt; </span><span class="hljs-built_in">print</span> <span class="hljs-built_in">hex</span>(e.symbols[<span class="hljs-string">&#x27;write&#x27;</span>]) <span class="hljs-comment"># 函数地址</span><br><span class="hljs-number">0x401680</span><br><span class="hljs-meta">&gt;&gt;&gt; </span><span class="hljs-built_in">print</span> <span class="hljs-built_in">hex</span>(e.got[<span class="hljs-string">&#x27;write&#x27;</span>]) <span class="hljs-comment"># GOT表的地址</span><br><span class="hljs-number">0x60b070</span><br><span class="hljs-meta">&gt;&gt;&gt; </span><span class="hljs-built_in">print</span> <span class="hljs-built_in">hex</span>(e.plt[<span class="hljs-string">&#x27;write&#x27;</span>]) <span class="hljs-comment"># PLT的地址</span><br><span class="hljs-number">0x401680</span><br></code></pre></td></tr></table></figure>
-
-<h3 id="shellcode使用"><a href="#shellcode使用" class="headerlink" title="shellcode使用"></a>shellcode使用</h3><p><strong>pwnlib.shellcraft模块</strong>包含<strong>生成shell代码</strong>的函数。<br>其中的子模块声明结构，比如</p>
+<p>其中，<code>value</code> 是一个无符号整数，<code>string</code> 是一个只包含 <code>&#39;0&#39;</code> 和 <code>&#39;1&#39;</code> 的字符串，<code>bitset</code> 是另一个 <code>std::bitset</code> 对象。</p>
+<p><strong>重点：</strong>使用bitset创建的二进制在数组中存放是逆序的，而且直接打印出来也是逆序的。用下标的形式输出可以发现。</p>
+<p>下面是 <code>std::bitset</code> 类型的一些常用操作：</p>
 <ul>
-<li>ARM架构: shellcraft.arm</li>
-<li>AMD64架构: shellcraft.amd64</li>
-<li>Intel 80386架构: shellcraft.i386</li>
-<li>通用: shellcraft.common</li>
+<li><code>size()</code> 返回 <code>std::bitset</code> 的长度</li>
+<li><code>count()</code> 返回 <code>std::bitset</code> 中值为 1 的位的数量</li>
+<li><code>any()</code> 返回 <code>std::bitset</code> 中是否存在值为 1 的位</li>
+<li><code>none()</code> 返回 <code>std::bitset</code> 中是否所有位都是 0</li>
+<li><code>all()</code> 返回 <code>std::bitset</code> 中是否所有位都是 1</li>
+<li><code>test(pos)</code> 返回 <code>std::bitset</code> 中位于 <code>pos</code> 位置的值</li>
+<li><code>set(pos)</code> 将 <code>std::bitset</code> 中位于 <code>pos</code> 位置的值设为 1</li>
+<li><code>reset(pos)</code> 将 <code>std::bitset</code> 中位于 <code>pos</code> 位置的值设为 0</li>
+<li><code>flip(pos)</code> 将 <code>std::bitset</code> 中位于 <code>pos</code> 位置的值取反</li>
+<li><code>to_ulong()</code> 返回 <code>std::bitset</code> 转换成的无符号整数值</li>
+<li><code>to_ullong()</code> 返回 <code>std::bitset</code> 转换成的无符号长整数值</li>
 </ul>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs python"><br>context(arch=<span class="hljs-string">&#x27;i386&#x27;</span>, os=<span class="hljs-string">&#x27;linux&#x27;</span>)<br>shellcode = asm(shellcraft.sh())<br></code></pre></td></tr></table></figure>
+<p><code>std::bitset</code> 重载了许多二进制运算符，如 <code>&amp;</code>、<code>|</code>、<code>^</code>、<code>~</code> 等，使其支持类似于整数类型的位运算操作。例如：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-function">std::bitset&lt;4&gt; <span class="hljs-title">bitset1</span><span class="hljs-params">(<span class="hljs-string">&quot;1010&quot;</span>)</span></span>;<br><span class="hljs-function">std::bitset&lt;4&gt; <span class="hljs-title">bitset2</span><span class="hljs-params">(<span class="hljs-string">&quot;0110&quot;</span>)</span></span>;<br><br>std::bitset&lt;4&gt; bitset3 = bitset1 &amp; bitset2; <span class="hljs-comment">// 按位与运算</span><br>std::bitset&lt;4&gt; bitset4 = bitset1 | bitset2; <span class="hljs-comment">// 按位或运算</span><br>std::bitset&lt;4&gt; bitset5 = bitset1 ^ bitset2; <span class="hljs-comment">// 按位异或运算</span><br>std::bitset&lt;4&gt; bitset6 = ~bitset<br><br></code></pre></td></tr></table></figure>
 
-<h3 id="remote-process读写接口"><a href="#remote-process读写接口" class="headerlink" title="remote&#x2F;process读写接口"></a>remote&#x2F;process读写接口</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment"># 第一种连接方式，通过ip和port去连接</span><br>conn = remote(<span class="hljs-string">&#x27;127.0.0.1&#x27;</span>, <span class="hljs-number">8888</span>)  <br><span class="hljs-comment"># 第二种连接方式，通过ssh连接</span><br>shell = ssh(host=<span class="hljs-string">&#x27;192.168.14.144&#x27;</span>, user=<span class="hljs-string">&#x27;root&#x27;</span>, port=<span class="hljs-number">2222</span>, password=<span class="hljs-string">&#x27;123456&#x27;</span>)<br><br><span class="hljs-comment">#接受或者发送数据</span><br>conn.send(data) <span class="hljs-comment">#发送数据</span><br>conn.sendline(data) <span class="hljs-comment">#发送一行数据，相当于在数据后面加\n</span><br><span class="hljs-comment">#接收数据，numb制定接收的字节，timeout指定超时</span><br>conn.recv(numb = <span class="hljs-number">2048</span>, timeout = default)<br><span class="hljs-comment">#接受一行数据，keepends为是否保留行尾的\n</span><br>conn.recvline(keepends=<span class="hljs-literal">True</span>)<br><span class="hljs-comment">#接受数据直到我们设置的标志出现</span><br>conn.recvuntil(<span class="hljs-string">&quot;Hello,World\n&quot;</span>,drop=fasle) <br>conn.recvall()  <span class="hljs-comment">#一直接收直到 EOF</span><br>conn.recvrepeat(timeout = default)  <span class="hljs-comment">#持续接受直到EOF或timeout</span><br><span class="hljs-comment">#直接进行交互，相当于回到shell的模式，在取得shell之后使用</span><br>conn.interactive()<br></code></pre></td></tr></table></figure>
+<p>还可以使用左移、右移运算符进行位移操作：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-function">std::bitset&lt;4&gt; <span class="hljs-title">bitset1</span><span class="hljs-params">(<span class="hljs-string">&quot;0101&quot;</span>)</span></span>;<br><br>std::bitset&lt;4&gt; bitset2 = bitset1 &lt;&lt; <span class="hljs-number">2</span>; <span class="hljs-comment">// 左移 2 位，结果为 &quot;010100&quot;</span><br>std::bitset&lt;4&gt; bitset3 = bitset1 &gt;&gt; <span class="hljs-number">1</span>; <span class="hljs-comment">// 右移 1 位，结果为 &quot;0010&quot;</span><br><br></code></pre></td></tr></table></figure>
+
+<p><code>std::bitset</code> 还支持 <code>to_string()</code> 方法，将其转换成二进制字符串表示：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-function">std::bitset&lt;4&gt; <span class="hljs-title">bitset1</span><span class="hljs-params">(<span class="hljs-string">&quot;1010&quot;</span>)</span></span>;<br>std::string str = bitset1.<span class="hljs-built_in">to_string</span>(); <span class="hljs-comment">// &quot;1010&quot;</span><br><br></code></pre></td></tr></table></figure>
+
+<p><code>std::bitset</code> 可以作为容器类型使用，可以使用下标访问、迭代器等方式访问其元素。此外，它还可以通过位集合（bitset set operations）进行集合运算，如并集、交集、补集等，可以使用 <code>std::bitset</code> 的成员函数 <code>set()</code>、<code>reset()</code>、<code>flip()</code> 进行相应的集合操作。</p>
+<p><strong>演示代码：</strong></p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;bitset&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;cassert&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;iostream&gt;</span></span><br> <br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span><br><span class="hljs-function"></span>&#123;<br>    <span class="hljs-comment">// 构造函数：</span><br>    <span class="hljs-keyword">constexpr</span> std::bitset&lt;4&gt; b1;<br>    <span class="hljs-keyword">constexpr</span> std::bitset&lt;4&gt; b2&#123;<span class="hljs-number">0xA</span>&#125;; <span class="hljs-comment">// == 0B1010</span><br>    std::bitset&lt;4&gt; b3&#123;<span class="hljs-string">&quot;0011&quot;</span>&#125;; <span class="hljs-comment">// 尚不能为 constexpr</span><br>    std::bitset&lt;8&gt; b4&#123;<span class="hljs-string">&quot;ABBA&quot;</span>, <span class="hljs-comment">/*length*/</span><span class="hljs-number">4</span>, <span class="hljs-comment">/*0:*/</span><span class="hljs-string">&#x27;A&#x27;</span>, <span class="hljs-comment">/*1:*/</span><span class="hljs-string">&#x27;B&#x27;</span>&#125;; <span class="hljs-comment">// == 0B0000&#x27;0110</span><br> <br>    <span class="hljs-comment">// 能打印出 bitset 到流：</span><br>    std::cout &lt;&lt; <span class="hljs-string">&quot;b1:&quot;</span> &lt;&lt; b1 &lt;&lt; <span class="hljs-string">&quot;; b2:&quot;</span> &lt;&lt; b2 &lt;&lt; <span class="hljs-string">&quot;; b3:&quot;</span> &lt;&lt; b3 &lt;&lt; <span class="hljs-string">&quot;; b4:&quot;</span> &lt;&lt; b4 &lt;&lt; <span class="hljs-string">&#x27;\n&#x27;</span>;<br> <br>    <span class="hljs-comment">// bitset 支持逐位运算：</span><br>    b3 |= <span class="hljs-number">0b0100</span>; <span class="hljs-built_in">assert</span>(b3 == <span class="hljs-number">0b0111</span>);<br>    b3 &amp;= <span class="hljs-number">0b0011</span>; <span class="hljs-built_in">assert</span>(b3 == <span class="hljs-number">0b0011</span>);<br>    b3 ^= std::bitset&lt;<span class="hljs-number">4</span>&gt;&#123;<span class="hljs-number">0b1100</span>&#125;; <span class="hljs-built_in">assert</span>(b3 == <span class="hljs-number">0b1111</span>);<br> <br>    <span class="hljs-comment">// 整个集合上的操作：</span><br>    b3.<span class="hljs-built_in">reset</span>(); <span class="hljs-built_in">assert</span>(b3 == <span class="hljs-number">0</span>);<br>    b3.<span class="hljs-built_in">set</span>(); <span class="hljs-built_in">assert</span>(b3 == <span class="hljs-number">0b1111</span>);<br>    <span class="hljs-built_in">assert</span>(b3.<span class="hljs-built_in">all</span>() &amp;&amp; b3.<span class="hljs-built_in">any</span>() &amp;&amp; !b3.<span class="hljs-built_in">none</span>());<br>    b3.<span class="hljs-built_in">flip</span>(); <span class="hljs-built_in">assert</span>(b3 == <span class="hljs-number">0</span>);<br> <br>    <span class="hljs-comment">// 单独位上的操作：</span><br>    b3.<span class="hljs-built_in">set</span>(<span class="hljs-comment">/* position = */</span> <span class="hljs-number">1</span>, <span class="hljs-literal">true</span>); <span class="hljs-built_in">assert</span>(b3 == <span class="hljs-number">0b0010</span>);<br>    b3.<span class="hljs-built_in">set</span>(<span class="hljs-comment">/* position = */</span> <span class="hljs-number">1</span>, <span class="hljs-literal">false</span>); <span class="hljs-built_in">assert</span>(b3 == <span class="hljs-number">0</span>);<br>    b3.<span class="hljs-built_in">flip</span>(<span class="hljs-comment">/* position = */</span> <span class="hljs-number">2</span>); <span class="hljs-built_in">assert</span>(b3 == <span class="hljs-number">0b0100</span>);<br>    b3.<span class="hljs-built_in">reset</span>(<span class="hljs-comment">/* position = */</span> <span class="hljs-number">2</span>); <span class="hljs-built_in">assert</span>(b3 == <span class="hljs-number">0</span>);<br> <br>    <span class="hljs-comment">// 支持下标 operator[] ：</span><br>    b3[<span class="hljs-number">2</span>] = <span class="hljs-literal">true</span>; <span class="hljs-built_in">assert</span>(<span class="hljs-literal">true</span> == b3[<span class="hljs-number">2</span>]);<br> <br>    <span class="hljs-comment">// 其他操作：</span><br>    <span class="hljs-built_in">assert</span>(b3.<span class="hljs-built_in">count</span>() == <span class="hljs-number">1</span>);<br>    <span class="hljs-built_in">assert</span>(b3.<span class="hljs-built_in">size</span>() == <span class="hljs-number">4</span>);<br>    <span class="hljs-built_in">assert</span>(b3.<span class="hljs-built_in">to_ullong</span>() == <span class="hljs-number">0b0100</span>ULL);<br>    <span class="hljs-built_in">assert</span>(b3.<span class="hljs-built_in">to_string</span>() == <span class="hljs-string">&quot;0100&quot;</span>);<br>&#125;<br></code></pre></td></tr></table></figure>
 
                 
               </div>
@@ -342,7 +361,7 @@
     
       <span class="category-chain">
         
-  <a href="/categories/pwn/" class="category-chain-item">pwn</a>
+  <a href="/categories/%E7%BC%96%E7%A8%8B/" class="category-chain-item">编程</a>
   
   
 
@@ -357,7 +376,7 @@
     <div class="post-meta">
       <i class="iconfont icon-tags"></i>
       
-        <a href="/tags/%E5%B7%A5%E5%85%B7/" class="print-no-link">#工具</a>
+        <a href="/tags/%E5%AF%86%E7%A0%81/" class="print-no-link">#密码</a>
       
     </div>
   
@@ -369,8 +388,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>pwntools</div>
-      <div>http://example.com/2024/03/10/pwn/pwntools/</div>
+      <div>bitset</div>
+      <div>http://example.com/2024/03/20/编程/bitset/</div>
     </div>
     <div class="license-meta">
       
@@ -382,7 +401,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2024年3月10日</div>
+          <div>2024年3月20日</div>
         </div>
       
       
@@ -414,9 +433,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2024/03/11/pwn/rop/" title="rop">
+                      <a href="/2024/03/21/mysql/" title="mysql">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">rop</span>
+                        <span class="hidden-mobile">mysql</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -424,8 +443,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2024/03/09/pwn/%E8%8E%B7%E5%8F%96%E5%9C%B0%E5%9D%80/" title="获取地址">
-                        <span class="hidden-mobile">获取地址</span>
+                      <a href="/2024/03/16/%E9%80%86%E5%90%91/ollydbg%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8D%97/" title="ollydbg使用指南">
+                        <span class="hidden-mobile">ollydbg使用指南</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
