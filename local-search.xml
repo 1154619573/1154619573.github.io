@@ -4,6 +4,19 @@
   
   
   <entry>
+    <title>汇编指令</title>
+    <link href="/2024/03/25/%E6%B1%87%E7%BC%96%E6%8C%87%E4%BB%A4/"/>
+    <url>/2024/03/25/%E6%B1%87%E7%BC%96%E6%8C%87%E4%BB%A4/</url>
+    
+    <content type="html"><![CDATA[]]></content>
+    
+    
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>mysql</title>
     <link href="/2024/03/21/mysql/"/>
     <url>/2024/03/21/mysql/</url>
@@ -42,33 +55,6 @@
     <tags>
       
       <tag>密码</tag>
-      
-    </tags>
-    
-  </entry>
-  
-  
-  
-  <entry>
-    <title>ollydbg使用指南</title>
-    <link href="/2024/03/16/%E9%80%86%E5%90%91/ollydbg%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8D%97/"/>
-    <url>/2024/03/16/%E9%80%86%E5%90%91/ollydbg%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8D%97/</url>
-    
-    <content type="html"><![CDATA[<h4 id="寄存器"><a href="#寄存器" class="headerlink" title="寄存器"></a>寄存器</h4><p>处理器在执行程序时需要一个助手。当执行一条指令时，例如将两个内存单元中存放的内容相加，处理器需要先把其中一个的内容置入寄存器，然后再把另一个内容置入，相当于内存，但比内存速度快容量小。</p>]]></content>
-    
-    
-    <categories>
-      
-      <category>逆向</category>
-      
-    </categories>
-    
-    
-    <tags>
-      
-      <tag>动态调试</tag>
-      
-      <tag>ollydbg</tag>
       
     </tags>
     
