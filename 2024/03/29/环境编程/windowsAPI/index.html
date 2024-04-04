@@ -16,21 +16,22 @@
   <meta name="author" content="TangSan">
   <meta name="keywords" content="">
   
-    <meta name="description" content="唐三的博客">
+    <meta name="description" content="Windows数据类型在众多的 Windows数据类型中，最常用的有 DWORD、HANDLE、LPTSTR、WORD、BYTE、CHAR 等。在 Windows 系统中，DWORD 用于表示无符号整型的数据，意为 double word，32位。 示例	 12345678910111213141516171819202122232425262728293031323334353637383940">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Poseidon">
-<meta property="og:url" content="http://example.com/2024/03/25/olldgb%E6%95%99%E7%A8%8B/%E6%B1%87%E7%BC%96%E6%8C%87%E4%BB%A4/index.html">
+<meta property="og:title" content="windowsAPI">
+<meta property="og:url" content="http://example.com/2024/03/29/%E7%8E%AF%E5%A2%83%E7%BC%96%E7%A8%8B/windowsAPI/index.html">
 <meta property="og:site_name" content="Poseidon">
-<meta property="og:description" content="唐三的博客">
+<meta property="og:description" content="Windows数据类型在众多的 Windows数据类型中，最常用的有 DWORD、HANDLE、LPTSTR、WORD、BYTE、CHAR 等。在 Windows 系统中，DWORD 用于表示无符号整型的数据，意为 double word，32位。 示例	 12345678910111213141516171819202122232425262728293031323334353637383940">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2024-03-25T03:16:32.561Z">
-<meta property="article:modified_time" content="2024-03-25T12:25:14.281Z">
+<meta property="article:published_time" content="2024-03-29T12:44:08.000Z">
+<meta property="article:modified_time" content="2024-03-29T13:35:40.697Z">
 <meta property="article:author" content="TangSan">
+<meta property="article:tag" content="windowsAPI">
 <meta name="twitter:card" content="summary_large_image">
   
   
   
-  <title>Poseidon</title>
+  <title>windowsAPI - Poseidon</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -225,7 +226,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text=""></span>
+            <span id="subtitle" data-typed-text="windowsAPI"></span>
           
         </div>
 
@@ -236,8 +237,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2024-03-25 11:16" pubdate>
-          2024年3月25日 上午
+        <time datetime="2024-03-29 20:44" pubdate>
+          2024年3月29日 晚上
         </time>
       </span>
     
@@ -248,7 +249,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          0 字
+          914 字
         
       </span>
     
@@ -259,7 +260,7 @@
         
         
         
-          1 分钟
+          8 分钟
         
       </span>
     
@@ -304,12 +305,125 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header"></h1>
+            <h1 id="seo-header">windowsAPI</h1>
             
             
               <div class="markdown-body">
                 
-                
+                <h3 id="Windows数据类型"><a href="#Windows数据类型" class="headerlink" title="Windows数据类型"></a><strong>Windows</strong>数据类型</h3><p>在众多的 Windows数据类型中，最常用的有 DWORD、HANDLE、LPTSTR、WORD、BYTE、CHAR 等。在 Windows 系统中，DWORD 用于表示无符号整型的数据，意为 double word，32位。</p>
+<p>示例	</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;windows.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;stdio.h&gt;</span></span><br><br><span class="hljs-meta">#<span class="hljs-keyword">pragma</span> comment (lib, <span class="hljs-string">&quot;user32.lib&quot;</span>)</span><br><br><span class="hljs-type">int</span> <span class="hljs-title function_">WinMain</span><span class="hljs-params">(</span><br><span class="hljs-params">	HINSTANCE hinstance,</span><br><span class="hljs-params">	HINSTANCE hPrevinstance,</span><br><span class="hljs-params">	LPSTR lpCmdLine,</span><br><span class="hljs-params">	<span class="hljs-type">int</span> nCmdShow </span><br><span class="hljs-params">)</span><br>&#123;<br>	<span class="hljs-comment">//定义字符串 </span><br>	LPSTR szString = <span class="hljs-string">&quot;windows data type, string.&quot;</span>;<br>	<span class="hljs-comment">//定义字符数组</span><br>	CHAR lpString[<span class="hljs-number">120</span>];<br>	<span class="hljs-comment">//定义DWORD类型的数组 </span><br>	DWORD dwMax = <span class="hljs-number">0xffffffff</span>;<br>	DWORD dwOne = <span class="hljs-number">0x1</span>;<br>	<span class="hljs-comment">//定义int类型的数据</span><br>	INT iMax = <span class="hljs-number">0xffffffff</span>;<br>	INT iOne = <span class="hljs-number">0x1</span>;<br>	<br>	<span class="hljs-comment">//显示字符串</span><br>	MessageBox(<span class="hljs-literal">NULL</span>, szString, <span class="hljs-string">&quot;LPSTR&quot;</span>, MB_OK);<br>	<span class="hljs-comment">//复制内存，将字符串复制到数组当中。（包括NULL结束符）</span><br>	CopyMemory(lpString, szString, lstrlen(szString)+<span class="hljs-number">1</span>);<br>	<span class="hljs-comment">//显示复制的字符串</span><br>	MessageBox(<span class="hljs-literal">NULL</span>, lpString, <span class="hljs-string">&quot;CHAR[]&quot;</span>, MB_OK);<br>	<br>	<span class="hljs-comment">//比较DWORD类型,并显示结果</span><br>	<span class="hljs-keyword">if</span>(dwMax &gt; dwOne) &#123;<br>		MessageBox(<span class="hljs-literal">NULL</span>, <span class="hljs-string">&quot;DWORD 数据类型 0xffffffff &gt; 0x1&quot;</span>, <span class="hljs-string">&quot;DWORD&quot;</span>, MB_OK);<br>	&#125; <br>	<span class="hljs-comment">//比较INT类型，并显示结果</span><br>	<span class="hljs-keyword">if</span>(iMax &lt; iOne) &#123;<br>		MessageBox(<span class="hljs-literal">NULL</span>, <span class="hljs-string">&quot;INT 数据类型 0xffffffff &gt; 0x1&quot;</span>, <span class="hljs-string">&quot;INT&quot;</span>, MB_OK);<br>	&#125; <br>	<span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;	<br>&#125; <br></code></pre></td></tr></table></figure>
+
+<p>在这个程序中，使用了 4 种Windows 数据类型，分别是 LPSTR、CHAR、DWORD 和INT。LPSTR 类型的数据是字符串，也就是字符指针，CHAR 是字符，DWORD是 32 位的无符号整数，INT是 32 位有符号整数。</p>
+<h4 id="常用的数据类型"><a href="#常用的数据类型" class="headerlink" title="常用的数据类型"></a>常用的数据类型</h4><table>
+<thead>
+<tr>
+<th align="center">类型</th>
+<th align="center">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">BOOL</td>
+<td align="center">布尔变量类型（值只能是true或者false）</td>
+</tr>
+<tr>
+<td align="center">BYTE</td>
+<td align="center">字节类型</td>
+</tr>
+<tr>
+<td align="center">CHAR</td>
+<td align="center">8比特字节（ANSI）</td>
+</tr>
+<tr>
+<td align="center">CONST</td>
+<td align="center">常量，相当于标准C中的“const”关键字</td>
+</tr>
+<tr>
+<td align="center">DWORD</td>
+<td align="center">32比特无符号整型数据</td>
+</tr>
+<tr>
+<td align="center">DWORD32</td>
+<td align="center">32比特无符号整型数据</td>
+</tr>
+<tr>
+<td align="center">DWORD32</td>
+<td align="center">64比特无符号整型数据</td>
+</tr>
+<tr>
+<td align="center">FLOAT</td>
+<td align="center">浮点数据类型</td>
+</tr>
+<tr>
+<td align="center">HANDLE</td>
+<td align="center">对象的句柄，最基本的句柄类型</td>
+</tr>
+<tr>
+<td align="center">HICON</td>
+<td align="center">图标的句柄</td>
+</tr>
+<tr>
+<td align="center">HINSTANCE</td>
+<td align="center">程序实例的句柄</td>
+</tr>
+<tr>
+<td align="center">HKEY</td>
+<td align="center">注册表键的句柄</td>
+</tr>
+<tr>
+<td align="center">HMODULE</td>
+<td align="center">模块的句柄</td>
+</tr>
+<tr>
+<td align="center">HWND</td>
+<td align="center">窗口的句柄</td>
+</tr>
+<tr>
+<td align="center">INT</td>
+<td align="center">32位有符号整型数据类型</td>
+</tr>
+<tr>
+<td align="center">INT_PTR</td>
+<td align="center">指向INT数据类型的指针类型</td>
+</tr>
+<tr>
+<td align="center">UINT</td>
+<td align="center">无符号INT</td>
+</tr>
+<tr>
+<td align="center">PVOID</td>
+<td align="center">普通指针</td>
+</tr>
+<tr>
+<td align="center">LPARAM</td>
+<td align="center">消息的L参数</td>
+</tr>
+<tr>
+<td align="center">WPARAM</td>
+<td align="center">消息的W参数</td>
+</tr>
+<tr>
+<td align="center">HANDLE</td>
+<td align="center">对象的句柄，最基本的句柄类型</td>
+</tr>
+<tr>
+<td align="center">LPSTR</td>
+<td align="center">字符指针，也就是字符串变量</td>
+</tr>
+<tr>
+<td align="center">LPCSTR</td>
+<td align="center">字符串常量</td>
+</tr>
+<tr>
+<td align="center">LPCTSTR</td>
+<td align="center">根据环境配置，如果定义了UNICODE宏，则是LPCWSTR类型，否则则为LPCSTR类型</td>
+</tr>
+</tbody></table>
+<p>命名规律：基本数据类型包括 BYTE、CHAR、WORD、SHORT、DOWRD、INT 等。<strong>指针类型</strong>的命令方式一般是在其指向的数据类型前加<strong>“LP”或“P”</strong>，比如指向 DWORD的指针类型为“LPDWORD”和“PDWORD”。各种<strong>句柄类型</strong>的命令方式一般都是在对象名前加<strong>“H”</strong>。Windows 系统中有很多对象，所有表示一个对象的数据类型都是句柄，每一种对象都对应着一种句柄类型，比如与位图( BITMAP)对应的句柄类型为“HBITMAP”，与菜单(MENU)对应的句柄类型为“HMENU”，与窗口(WINDOW)对应的句柄类型为“HWND”。<strong>无符号类型</strong>一般是以<strong>“U”</strong>开头，比如“INT”是符号类型，“UINT”是无符号类型，“LONG”是符号类型“ULONG”是无符号类型等。</p>
+<p>Windows数据类型都是由C类型经过重新定义得到的。</p>
+<h3 id="Windows-API的功能分类"><a href="#Windows-API的功能分类" class="headerlink" title="Windows API的功能分类"></a>Windows API的功能分类</h3><p>Windows API 所能实现的功能包括很多方面，在进行应用程序的开发时，开发人员可能会使用到<strong>文件、进程、内存、权限、系统信息</strong>等系统的基本服务和系统管理类的 API，可能会用到图形用户界面、控件等函数和对象，可能需要在界面上绘制图像处理多媒体信息等，还包括进行网络通信开发等。</p>
+<p>1、系统基本服务：文件系统，内存管理，进程、线程和模块，设备I&#x2F;O、驱动程序控制，调试与错误处理，windows系统信息，进程间通信，定时器和消息机制。</p>
+
                 
               </div>
             
@@ -317,6 +431,13 @@
             <div>
               <div class="post-metas my-3">
   
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/windowsAPI/" class="print-no-link">#windowsAPI</a>
+      
+    </div>
   
 </div>
 
@@ -326,8 +447,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div></div>
-      <div>http://example.com/2024/03/25/olldgb教程/汇编指令/</div>
+      <div>windowsAPI</div>
+      <div>http://example.com/2024/03/29/环境编程/windowsAPI/</div>
     </div>
     <div class="license-meta">
       
@@ -339,7 +460,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2024年3月25日</div>
+          <div>2024年3月29日</div>
         </div>
       
       
@@ -371,9 +492,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2024/03/27/%E7%8E%AF%E5%A2%83%E7%BC%96%E7%A8%8B/%E4%BA%8C%E8%BF%9B%E5%88%B6%E5%AD%A6%E4%B9%A0%E8%B7%AF%E7%BA%BF/" title="二进制学习路线">
+                      <a href="/2024/04/04/pwn%E6%94%BB%E5%87%BB%E6%B5%81%E7%A8%8B/" title="pwn攻击流程">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">二进制学习路线</span>
+                        <span class="hidden-mobile">pwn攻击流程</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -381,8 +502,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2024/03/21/mysql/" title="mysql">
-                        <span class="hidden-mobile">mysql</span>
+                      <a href="/2024/03/28/pwn/pwntools%E8%AF%AD%E6%B3%95/" title="pwntools语法">
+                        <span class="hidden-mobile">pwntools语法</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
